@@ -31,6 +31,7 @@ public class PlayerController : WalkingController
 	[HideInInspector]
 	public Animator animator;
 	PlayerStatTracker stats;
+	CharacterStat basicStats;
 	Inventory equipmentState;
 
 	public SpriteRenderer bodySprite;
@@ -42,6 +43,7 @@ public class PlayerController : WalkingController
 		base.Start();
 
 		stats = GetComponent<PlayerStatTracker>();
+		basicStats = GetComponent<CharacterStat>();
 		equipmentState = GetComponent<Inventory>();
 		animator = GetComponent<Animator>();
 
@@ -76,6 +78,7 @@ public class PlayerController : WalkingController
 
 	public void DeterminePlayerState()
 	{
+		animator.SetBool("isDead", basicStats.charMetrics.isDead);
 		animator.SetBool("isWalking", directionalInput.x != 0);
 		animator.SetFloat("walkingSpeed", Math.Abs(velocity.x));
 		animator.SetBool("inAir", getIsAirborne());
@@ -93,11 +96,11 @@ public class PlayerController : WalkingController
 		}
 	}
 
-	public bool UnresponsiveToInput { get => animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerHurt"); }
+	public bool UnresponsiveToInput { get => animator.GetCurrentAnimatorStateInfo(0).IsTag("uncn"); }
 	public bool CannotFlip { get => 
 			UnresponsiveToInput
 			|| animator.GetCurrentAnimatorStateInfo(0).IsTag("atk")
-			|| animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerJump"); 
+			|| animator.GetCurrentAnimatorStateInfo(0).IsTag("air"); 
 	}
 	public bool CannotMove { get => animator.GetCurrentAnimatorStateInfo(0).IsTag("atk")
 			|| animator.GetBool("ducking")
@@ -178,7 +181,7 @@ public class PlayerController : WalkingController
 		if (jumpsLeft > 0 && !CannotMove)
 		{
 			//Reset jump anim.
-			animator.Play("PlayerJump", 0, 0f);
+			animator.Play("Jump", 0, 0f);
 			velocity.y = maxJumpVelocity;
 			xMovementSmoothing = 0;
 			velocity.x = directionalInput.x * moveSpeed;
@@ -210,7 +213,7 @@ public class PlayerController : WalkingController
 	public override void CalculateVelocity()
 	{
 		float targetVelocityX;
-		if (animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerHurt"))
+		if (animator.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
 		{
 			//Moderate friction... None in air.
 			targetVelocityX = velocity.x / (getIsAirborne() ? 1 : 2);
