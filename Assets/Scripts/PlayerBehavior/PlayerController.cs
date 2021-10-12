@@ -13,6 +13,7 @@ public class PlayerController : WalkingController
 	public float crouchHeightModifier = 0.5f;
 
 	public float dashSpeedMultiplier;
+	public int dashStaminaDrainPerSec;
 	public float dashCooldown = 0.5f;
 	private float _dashTimer;
 	private int _priorDashTaps;
@@ -27,7 +28,6 @@ public class PlayerController : WalkingController
 	[HideInInspector]
 	public Animator animator;
 	PlayerStatTracker stats;
-	CharacterStat basicStats;
 	Inventory equipmentState;
 
 	public SpriteRenderer bodySprite;
@@ -39,7 +39,6 @@ public class PlayerController : WalkingController
 		base.Start();
 
 		stats = GetComponent<PlayerStatTracker>();
-		basicStats = GetComponent<CharacterStat>();
 		equipmentState = GetComponent<Inventory>();
 		animator = GetComponent<Animator>();
 
@@ -74,7 +73,7 @@ public class PlayerController : WalkingController
 
 	public void DeterminePlayerState()
 	{
-		animator.SetBool("isDead", basicStats.charMetrics.isDead);
+		animator.SetBool("isDead", stats.charMetrics.isDead);
 		animator.SetBool("isWalking", directionalInput.x != 0);
 		animator.SetFloat("walkingSpeed", Math.Abs(velocity.x));
 		animator.SetBool("inAir", getIsAirborne());
@@ -109,7 +108,15 @@ public class PlayerController : WalkingController
 
 	public void OnDash(bool press)
 	{
-		_dashing = press;
+		_dashing = press && stats.charMetrics.currentStamina > 0;
+		if (_dashing)
+		{
+			stats.ConstantStaminaDrain(dashStaminaDrainPerSec);
+		}
+		else
+		{
+			stats.DrainStamina(0, 1f);
+		}
 	}
 
 	public void SetDirectionalInput(Vector2 input)
@@ -131,13 +138,14 @@ public class PlayerController : WalkingController
 		}
 		if (_priorDashTaps >= 2)
 		{
-			_dashing = true;
+			_priorDashTaps = 0;
+			OnDash(true);
 		}
 		directionalInput = input;
 
-		if (Math.Abs(input.x)<1)
+		if (Math.Abs(input.x)<1 && _dashing)
 		{
-			_dashing = false;
+			OnDash(false);
 		}
 	}
 
