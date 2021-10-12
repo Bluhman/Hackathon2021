@@ -1973,6 +1973,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6602954759533235483, guid: 9deed252cae4270419c6840e20f36989, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6602954759692472218, guid: 9deed252cae4270419c6840e20f36989, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
