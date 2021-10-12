@@ -7,20 +7,16 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerStatTracker))]
 public class PlayerController : WalkingController
 {
-	//public enum PlayerAnimationState
-	//{
-	//	Standing,
-	//	Crouching,
-	//	Walking,
-	//	Jumping,
-	//	Attacking,
-	//	AttackingCrouch,
-	//	Stagger
-	//}
 	public float accelerationTimeAirborne = 1;
 
 	public float accelerationTimeGround = 0.1f;
 	public float crouchHeightModifier = 0.5f;
+
+	public float dashSpeedMultiplier;
+	public float dashCooldown = 0.5f;
+	private float _dashTimer;
+	private int _priorDashTaps;
+	private bool _dashing;
 
 	//public Vector2 weaponOffsetStanding;
 	public Vector2 weaponOffsetCrouching;
@@ -111,9 +107,38 @@ public class PlayerController : WalkingController
 			|| UnresponsiveToInput;
 	}
 
+	public void OnDash(bool press)
+	{
+		_dashing = press;
+	}
+
 	public void SetDirectionalInput(Vector2 input)
 	{
+		//Check the last directionalInput: is this a transition INTO a max left/right input?
+		var press = directionalInput.x != input.x && Math.Abs(input.x) == 1;
+		if (press)
+		{
+			_priorDashTaps++;
+			_dashTimer = dashCooldown;
+		}
+		else
+		{
+			_dashTimer -= Time.deltaTime;
+			if (_dashTimer<=0)
+			{
+				_priorDashTaps = 0;
+			}
+		}
+		if (_priorDashTaps >= 2)
+		{
+			_dashing = true;
+		}
 		directionalInput = input;
+
+		if (Math.Abs(input.x)<1)
+		{
+			_dashing = false;
+		}
 	}
 
 	public bool facingRight { get => bodySprite.flipX; }
@@ -152,6 +177,7 @@ public class PlayerController : WalkingController
 	public void OnJumpInputDown()
 	{
 		var isAirborne = !controller.collisions.below;
+		var didJump = false;
 
 		if (!isAirborne)
 		{
@@ -173,6 +199,7 @@ public class PlayerController : WalkingController
 				{
 					velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
 					velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
+					didJump = true;
 				}
 			}
 		}
@@ -186,6 +213,12 @@ public class PlayerController : WalkingController
 			xMovementSmoothing = 0;
 			velocity.x = directionalInput.x * moveSpeed;
 			jumpsLeft--;
+			didJump = true;
+		}
+
+		if (_dashing && didJump)
+		{
+			velocity.x *= dashSpeedMultiplier;
 		}
 	}
 
@@ -217,6 +250,10 @@ public class PlayerController : WalkingController
 		{
 			//Moderate friction... None in air.
 			targetVelocityX = velocity.x / (getIsAirborne() ? 1 : 2);
+			if (_dashing)
+			{
+				targetVelocityX *= dashSpeedMultiplier;
+			}
 		}
 		//Can't move voluntarily in these states:
 		else if (CannotMove)
@@ -226,6 +263,10 @@ public class PlayerController : WalkingController
 		else
 		{
 			targetVelocityX = directionalInput.x * moveSpeed;
+			if (_dashing)
+			{
+				targetVelocityX *= dashSpeedMultiplier;
+			}
 		}
 
 		velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref xMovementSmoothing, (controller.collisions.below) ? accelerationTimeGround : accelerationTimeAirborne);
