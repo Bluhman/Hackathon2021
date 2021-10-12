@@ -18,6 +18,10 @@ public class BaseMetrics
 			_currentHealth = Mathf.Clamp(value, 0, health);
 		}
 	}
+	public bool isDead
+	{
+		get => _currentHealth <= 0;
+	}
 	public int currentStamina
 	{
 		get => _currentStamina;
