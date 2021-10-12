@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-	public int memoryCount;
-   public int equippedWeaponId;
+	public IntReference memoryCount;
+    public IntReference equippedWeaponId;
 	[HideInInspector]
 	public Weapon equippedWeapon;
 	GameObject weaponPrefab;
@@ -16,7 +16,7 @@ public class Inventory : MonoBehaviour
 		var weaponDB = GameObject.FindGameObjectWithTag("GameController")
 			.GetComponent<WeaponDatabase>().weapons;
 
-		equippedWeapon = weaponDB.FirstOrDefault(w => w.id == equippedWeaponId);
+		equippedWeapon = weaponDB.FirstOrDefault(w => w.id == equippedWeaponId.value);
 
 		weaponPrefab = equippedWeapon.prefab;
 	}
