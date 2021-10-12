@@ -62,6 +62,17 @@ public class CharacterStat : MonoBehaviour
 		InvokeRepeating("RegenerateStamina", pauseBeforeRegen, 1f / staminaRegenPerSec * staminaRegenMultiplier);
 	}
 
+	public virtual void ConstantStaminaDrain(int amountPerSec)
+	{
+		CancelInvoke();
+		InvokeRepeating("DrainStaminaOverTime", 0f, 1f / amountPerSec);
+	}
+
+	protected virtual void DrainStaminaOverTime()
+	{
+		charMetrics.currentStamina -= 1;
+	}
+
 	public virtual void DrainFooting(int amount, Vector2 direction)
 	{
 		charMetrics.currentFooting -= amount;

@@ -7,7 +7,6 @@ public class PlayerInput : MonoBehaviour
 {
 	PlayerController player;
 	public float doubleTapDashTimingWindow = 0.25f;
-	private bool _pressedDirectionRecently; 
 
 	void Start()
 	{
@@ -20,10 +19,6 @@ public class PlayerInput : MonoBehaviour
 		Vector2 directionalInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 		player.SetDirectionalInput(directionalInput);
 
-		if (!_pressedDirectionRecently)
-		{
-			_pressedDirectionRecently = directionalInput.magnitude >= 1;
-		}
 
 		if (Input.GetButtonDown("Jump"))
 		{
@@ -32,6 +27,15 @@ public class PlayerInput : MonoBehaviour
 		if (Input.GetButtonUp("Jump"))
 		{
 			player.OnJumpInputUp();
+		}
+
+		if (Input.GetButtonDown("Dash"))
+		{
+			player.OnDash(true);
+		}
+		if (Input.GetButtonUp("Dash"))
+		{
+			player.OnDash(false);
 		}
 
 		if (Input.GetButtonDown("Fire1"))

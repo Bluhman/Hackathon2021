@@ -42,6 +42,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -190,9 +191,11 @@ MonoBehaviour:
   accelerationTimeAirborne: 0.7
   accelerationTimeGround: 0.1
   crouchHeightModifier: 0.5
+  dashSpeedMultiplier: 1.75
+  dashStaminaDrainPerSec: 6
+  dashCooldown: 0.5
   weaponOffsetCrouching: {x: 0.33, y: -0.61}
   maxJumps: 2
-  animationResetFlag: 0
   animator: {fileID: 0}
   bodySprite: {fileID: 0}
   clothingSprite: {fileID: 0}
@@ -208,6 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5261b337c052b478fc14a7e6c8d8a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doubleTapDashTimingWindow: 0.25
 --- !u!50 &5086157756408759466
 Rigidbody2D:
   serializedVersion: 4
@@ -809,6 +813,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
