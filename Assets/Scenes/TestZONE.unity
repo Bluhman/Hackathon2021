@@ -1079,7 +1079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d825699ab064ab4ba69185816999706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crushingDmg: 12
+  crushingDmg: 500
   slashingDmg: 0
   piercingDmg: 0
   mysticalDmg: 0
