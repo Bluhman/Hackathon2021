@@ -108,12 +108,13 @@ public class PlayerController : WalkingController
 
 	public void OnDash(bool press)
 	{
+		var wasDashing = _dashing;
 		_dashing = press && stats.charMetrics.currentStamina > 0;
 		if (_dashing)
 		{
 			stats.ConstantStaminaDrain(dashStaminaDrainPerSec);
 		}
-		else
+		else if (wasDashing)
 		{
 			stats.DrainStamina(0, 1f);
 		}
@@ -233,7 +234,7 @@ public class PlayerController : WalkingController
 	private void InitiateFallThrough()
 	{
 		controller.collisions.fallingThroughPlatform = true;
-		Invoke("ResetFallingThroughPlatform", 0.5f);
+		Invoke("ResetFallingThroughPlatform", 0.25f);
 	}
 
 	public void OnJumpInputUp()
