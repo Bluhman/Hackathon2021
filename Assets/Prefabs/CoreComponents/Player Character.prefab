@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 5086157756408759466}
   - component: {fileID: 7652516093417637476}
   - component: {fileID: 998406055765105005}
+  - component: {fileID: 4569502920032884954}
   m_Layer: 8
   m_Name: Player Character
   m_TagString: Player
@@ -186,7 +187,7 @@ MonoBehaviour:
   minJumpHeight: 0.5
   timeToJumpApex: 0.35
   moveSpeed: 6
-  terminalVelocity: 0
+  terminalVelocity: 20
   velocity: {x: 0, y: 0, z: 0}
   directionalInput: {x: 0, y: 0}
   accelerationTimeAirborne: 0.7
@@ -198,8 +199,8 @@ MonoBehaviour:
   weaponOffsetCrouching: {x: 0.33, y: -0.61}
   maxJumps: 2
   animator: {fileID: 0}
-  bodySprite: {fileID: 0}
-  clothingSprite: {fileID: 0}
+  bodySprite: {fileID: 6794094869273346546}
+  clothingSprite: {fileID: 6794094868674669975}
 --- !u!114 &6794094869180728176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -811,6 +812,25 @@ MonoBehaviour:
     weight: 0
     staminaCost: 0
     spawnPositionCrouching: {x: 0, y: 0}
+--- !u!95 &4569502920032884954
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6794094869180728185}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d9a25730e11f5b5439288fc45539e0ab, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6794094869273346548
 GameObject:
   m_ObjectHideFlags: 0
