@@ -5,21 +5,19 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-	public int memoryCount;
-   public int equippedWeaponId;
-	[HideInInspector]
-	public Weapon equippedWeapon;
+	public IntReference memoryCount;
+    public IntReference equippedWeaponId;
+    public WeaponDatabase weaponDB;
+
+    [HideInInspector]
+    public Weapon equippedWeapon;
 	GameObject weaponPrefab;
 
-	private void Start()
-	{
-		var weaponDB = GameObject.FindGameObjectWithTag("GameController")
-			.GetComponent<WeaponDatabase>().weapons;
+    private void Start()
+    {
+        equippedWeapon = weaponDB.value.FirstOrDefault(w => w.id == equippedWeaponId.value);
+        weaponPrefab = equippedWeapon.prefab;
+    }
 
-		equippedWeapon = weaponDB.FirstOrDefault(w => w.id == equippedWeaponId);
-
-		weaponPrefab = equippedWeapon.prefab;
-	}
-
-	public GameObject weaponEffect { get => weaponPrefab; }
+    public GameObject weaponEffect { get => weaponPrefab; }
 }

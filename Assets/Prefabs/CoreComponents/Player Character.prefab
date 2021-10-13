@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 6794094869180728176}
   - component: {fileID: 5086157756408759466}
   - component: {fileID: 7652516093417637476}
+  - component: {fileID: 998406055765105005}
   m_Layer: 8
   m_Name: Player Character
   m_TagString: Player
@@ -771,6 +772,45 @@ MonoBehaviour:
     m_RotationOrder: 4
   HPBarSlider: {fileID: 0}
   StaminaBarSlider: {fileID: 0}
+--- !u!114 &998406055765105005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6794094869180728185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f98a4bbd3962144a85eb9a6fa0bdc6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  memoryCount: {fileID: 11400000, guid: 7c92d01f49e54d749b14a1cce8633fac, type: 2}
+  equippedWeaponId: {fileID: 11400000, guid: 1979fb536e7c7a344b21814e7a6dddcc, type: 2}
+  weaponDB: {fileID: 11400000, guid: 7300c1704b4034f4c935992106a91c68, type: 2}
+  equippedWeapon:
+    itemType: 0
+    id: 0
+    name: 
+    description_short: 
+    description_long: 
+    statRequirements:
+      vigor: 0
+      poise: 0
+      endurance: 0
+      strength: 0
+      agility: 0
+      intelligence: 0
+      willpower: 0
+      luck: 0
+    attackEffectPrefabName: 
+    animationCategory: 0
+    strScaling: 0
+    agiScaling: 0
+    intScaling: 0
+    wilScaling: 0
+    weight: 0
+    staminaCost: 0
+    spawnPositionCrouching: {x: 0, y: 0}
 --- !u!1 &6794094869273346548
 GameObject:
   m_ObjectHideFlags: 0
