@@ -1066,11 +1066,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 6602954759533235480}
   focusAreaSize: {x: 3, y: 5}
+  lookAreaSize: {x: 5, y: 8}
   verticalOffset: 0.5
   lookAheadDistX: 2
   smoothTimeX: 0.4
   smoothTimeY: 0.2
   camDistance: 120
+  lookMultiplier: 33
 --- !u!1 &6865581734720191126
 GameObject:
   m_ObjectHideFlags: 0
