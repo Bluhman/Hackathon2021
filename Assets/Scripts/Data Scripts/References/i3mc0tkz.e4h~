@@ -1,0 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "References/Item List Reference")]
+public class ItemListReference : ScriptableObject
+{
+    public IEnumberable<Item> value;
+}

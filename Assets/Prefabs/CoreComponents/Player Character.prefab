@@ -42,6 +42,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -208,6 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5261b337c052b478fc14a7e6c8d8a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doubleTapDashTimingWindow: 0.25
 --- !u!50 &5086157756408759466
 Rigidbody2D:
   serializedVersion: 4
@@ -781,7 +783,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   memoryCount: {fileID: 11400000, guid: 7c92d01f49e54d749b14a1cce8633fac, type: 2}
   equippedWeaponId: {fileID: 11400000, guid: 1979fb536e7c7a344b21814e7a6dddcc, type: 2}
+  weaponDB: {fileID: 11400000, guid: 7300c1704b4034f4c935992106a91c68, type: 2}
   equippedWeapon:
+    itemType: 0
     id: 0
     name: 
     description_short: 
@@ -846,6 +850,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
