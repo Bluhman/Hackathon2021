@@ -125,7 +125,7 @@ public class PlayerController : WalkingController
 		var press = directionalInput.x != input.x && Math.Abs(input.x) == 1;
 		if (press)
 		{
-			_priorDashTaps++;
+			_priorDashTaps += Math.Sign(input.x);
 			_dashTimer = dashCooldown;
 		}
 		else
@@ -136,7 +136,7 @@ public class PlayerController : WalkingController
 				_priorDashTaps = 0;
 			}
 		}
-		if (_priorDashTaps >= 2)
+		if (Math.Abs(_priorDashTaps) >= 2)
 		{
 			_priorDashTaps = 0;
 			OnDash(true);
@@ -267,6 +267,7 @@ public class PlayerController : WalkingController
 		else if (CannotMove)
 		{
 			targetVelocityX = 0;
+			OnDash(false);
 		} 
 		else
 		{
