@@ -193,9 +193,9 @@ MonoBehaviour:
   accelerationTimeAirborne: 0.7
   accelerationTimeGround: 0.1
   crouchHeightModifier: 0.5
-  dashSpeedMultiplier: 1.75
-  dashStaminaDrainPerSec: 6
-  dashCooldown: 0.5
+  dashSpeedMultiplier: 1.5
+  dashStaminaDrainPerSec: 30
+  dashCooldown: 0.2
   weaponOffsetCrouching: {x: 0.33, y: -0.61}
   maxJumps: 2
   animator: {fileID: 0}
