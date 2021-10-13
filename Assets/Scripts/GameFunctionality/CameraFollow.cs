@@ -6,12 +6,14 @@ public class CameraFollow : MonoBehaviour
 {
 	public Controller2D target;
 	public Vector2 focusAreaSize;
+	public Vector2 lookAreaSize;
 
 	public float verticalOffset;
 	public float lookAheadDistX;
 	public float smoothTimeX;
 	public float smoothTimeY;
 	public float camDistance;
+	public float lookMultiplier;
 
 	FocusArea focusArea;
 
@@ -22,6 +24,7 @@ public class CameraFollow : MonoBehaviour
 	float smoothLookVelocityY;
 
 	bool lookAheadStopped;
+	bool freeLook;
 
 	private void Start()
 	{
@@ -30,7 +33,43 @@ public class CameraFollow : MonoBehaviour
 
 	private void LateUpdate()
 	{
+
+		if (Input.GetButtonDown("Look"))
+		{
+			focusArea.ResizeBounds(lookAreaSize);
+		}
+		if (Input.GetButtonUp("Look"))
+		{
+			focusArea.ResizeBounds(focusAreaSize);
+		}
+
+		freeLook = Input.GetButton("Look");
+		if (freeLook)
+		{
+			var lookingTarget = Input.mousePosition;
+			//Center:
+			lookingTarget.x -= Screen.width/2;
+			lookingTarget.y -= Screen.height/2;
+
+			//Normalize
+			lookingTarget.x /= Screen.width;
+			lookingTarget.y /= Screen.height;
+			lookingTarget *= lookMultiplier;
+
+			//center on player.
+			lookingTarget.x += target.boxCollision.bounds.center.x;
+			lookingTarget.y += target.boxCollision.bounds.center.y;
+			Debug.Log(lookingTarget);
+			focusArea.Update(new Bounds(lookingTarget, new Vector2(0.5f, 0.5f)));
+		} 
+		else
+		{
+
+		}
+
 		focusArea.Update(target.boxCollision.bounds);
+
+		
 
 		Vector2 focusPosition = focusArea.center + Vector2.up * verticalOffset;
 
@@ -86,6 +125,14 @@ public class CameraFollow : MonoBehaviour
 
 			velocity = Vector2.zero;
 			center = new Vector2((left + right) / 2, (top + bottom) / 2);
+		}
+
+		public void ResizeBounds(Vector2 newSize)
+		{
+			left = center.x - newSize.x / 2;
+			right = center.x + newSize.x / 2;
+			bottom = center.y - newSize.y / 2;
+			top = center.y + newSize.y / 2;
 		}
 
 		public void Update(Bounds targetBounds)
