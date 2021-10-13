@@ -48,6 +48,10 @@ public class PlayerController : WalkingController
 
 	protected override void Update()
 	{
+		if (stats.charMetrics.currentStamina <= 0 && _dashing)
+		{
+			OnDash(false);
+		}
 
 		DeterminePlayerState();
 		CalculateVelocity();
