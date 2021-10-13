@@ -111,6 +111,15 @@ public class Controller2D : RaycastController
 
 			if (hit)
 			{
+				if (hit.collider.tag == "ThruPlatform")
+				{
+					//If currently attempting to fall through a platform, ignore the collision.
+					if (collisions.fallingThroughPlatform)
+					{
+						return;
+					}
+				}
+
 				float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
 				if (slopeAngle != collisions.slopeAngle)
 				{
@@ -141,12 +150,21 @@ public class Controller2D : RaycastController
 				{
 					continue;
 				}
+				if (hit.collider.tag == "ThruPlatform")
+				{
+					//If currently attempting to fall through a platform, ignore the collision.
+					if (collisions.fallingThroughPlatform)
+					{
+						continue;
+					}
+				}
 
 				float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
 
 				//Slope logic: only runs this on the bottom collision of the target.
 				if (i == 0 && slopeAngle <= maxSlopeAngle)
 				{
+					
 					if (collisions.descendingSlope)
 					{
 						collisions.descendingSlope = false;
@@ -164,6 +182,11 @@ public class Controller2D : RaycastController
 
 				if (!collisions.climbingSlope || slopeAngle > maxSlopeAngle)
 				{
+					if (hit.collider.tag == "ThruPlatform")
+					{
+						//Don't make sloped platforms slide you.
+						continue;
+					}
 					moveAmount.x = (hit.distance - skinWidth) * directionX;
 					rayLength = hit.distance;
 
@@ -215,6 +238,14 @@ public class Controller2D : RaycastController
 
 			if (hit)
 			{
+				if (hit.collider.tag == "ThruPlatform")
+				{
+					//If currently attempting to fall through a platform, ignore the collision.
+					if (collisions.fallingThroughPlatform)
+					{
+						return;
+					}
+				}
 				float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
 				if (slopeAngle != 0 && slopeAngle <= maxSlopeAngle)
 				{
@@ -241,6 +272,14 @@ public class Controller2D : RaycastController
 	{
 		if (hit)
 		{
+			if (hit.collider.tag == "ThruPlatform")
+			{
+				//If currently attempting to fall through a platform, ignore the collision.
+				if (collisions.fallingThroughPlatform)
+				{
+					return;
+				}
+			}
 			float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
 			if (slopeAngle > maxSlopeAngle)
 			{
