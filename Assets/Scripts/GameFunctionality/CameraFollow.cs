@@ -7,6 +7,7 @@ public class CameraFollow : MonoBehaviour
 	public Controller2D target;
 	public Vector2 focusAreaSize;
 	public Vector2 lookAreaSize;
+	public BoxCollider2D lookBoundaries;
 
 	public float verticalOffset;
 	public float lookAheadDistX;
@@ -16,6 +17,10 @@ public class CameraFollow : MonoBehaviour
 	public float lookMultiplier;
 
 	FocusArea focusArea;
+	//If a focus area is defined, we want to bind the camera's movement into the box given.
+	Camera myCamera;
+	Vector2 minPos;
+	Vector2 maxPos;
 
 	float currentLookAheadX;
 	float targetLookAheadX;
@@ -29,6 +34,16 @@ public class CameraFollow : MonoBehaviour
 	private void Start()
 	{
 		focusArea = new FocusArea(target.boxCollision.bounds, focusAreaSize);
+		if (lookBoundaries != null)
+		{
+			myCamera = GetComponent<Camera>();
+			var bottomLeft = myCamera.ViewportToWorldPoint(new Vector3(0, 0, camDistance));
+			var topRight = myCamera.ViewportToWorldPoint(new Vector3(1, 1, camDistance));
+			var camDimensions = topRight - bottomLeft;
+			Debug.Log(camDimensions);
+			minPos = lookBoundaries.bounds.min + camDimensions / 2;
+			maxPos = lookBoundaries.bounds.max - camDimensions / 2;
+		}
 	}
 
 	private void LateUpdate()
@@ -48,8 +63,8 @@ public class CameraFollow : MonoBehaviour
 		{
 			var lookingTarget = Input.mousePosition;
 			//Center:
-			lookingTarget.x -= Screen.width/2;
-			lookingTarget.y -= Screen.height/2;
+			lookingTarget.x -= Screen.width / 2;
+			lookingTarget.y -= Screen.height / 2;
 
 			//Normalize
 			lookingTarget.x /= Screen.width;
@@ -61,15 +76,9 @@ public class CameraFollow : MonoBehaviour
 			lookingTarget.y += target.boxCollision.bounds.center.y;
 			Debug.Log(lookingTarget);
 			focusArea.Update(new Bounds(lookingTarget, new Vector2(0.5f, 0.5f)));
-		} 
-		else
-		{
-
 		}
 
 		focusArea.Update(target.boxCollision.bounds);
-
-		
 
 		Vector2 focusPosition = focusArea.center + Vector2.up * verticalOffset;
 
@@ -91,14 +100,19 @@ public class CameraFollow : MonoBehaviour
 			}
 		}
 
-		
 		currentLookAheadX = Mathf.SmoothDamp(currentLookAheadX, targetLookAheadX, ref smoothLookVelocityX, smoothTimeX);
 
 		focusPosition.y = Mathf.SmoothDamp(transform.position.y, focusPosition.y, ref smoothLookVelocityY, smoothTimeY);
 
 		focusPosition += Vector2.right * currentLookAheadX;
 
-		transform.position = (Vector3)focusPosition + Vector3.forward * -camDistance;
+		var cameraPositionPlanned = (Vector3)focusPosition + Vector3.forward * -camDistance;
+		if (lookBoundaries != null)
+		{
+			cameraPositionPlanned.x = Mathf.Clamp(cameraPositionPlanned.x, minPos.x, maxPos.x);
+			cameraPositionPlanned.y = Mathf.Clamp(cameraPositionPlanned.y, minPos.y, maxPos.y);
+		}
+		transform.position = cameraPositionPlanned;
 	}
 
 	private void OnDrawGizmos()
