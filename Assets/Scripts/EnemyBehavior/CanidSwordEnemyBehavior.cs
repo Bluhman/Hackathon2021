@@ -9,12 +9,12 @@ public class CanidSwordEnemyBehavior : CharacterStat
 {
 	Animator animator;
 	WalkingController wc;
+	AwarenessBehavior ab;
 	public GameObject attackBox;
 	public SpriteRenderer bodySprite;
 
 	float swordMirrorDistance;
 	bool alerted;
-	GameObject thePlayer;
 
 	// Start is called before the first frame update
 	void Start()
@@ -23,7 +23,8 @@ public class CanidSwordEnemyBehavior : CharacterStat
 
 		animator = GetComponent<Animator>();
 		wc = GetComponent<WalkingController>();
-		thePlayer = GameObject.FindWithTag("Player");
+		ab = GetComponent<AwarenessBehavior>();
+		
 
 		swordMirrorDistance = attackBox.transform.localPosition.x;
 	}
@@ -33,6 +34,7 @@ public class CanidSwordEnemyBehavior : CharacterStat
 	{
 		base.Update();
 
+		alerted = ab.alerted;
 		DetermineState();
 	}
 
@@ -40,7 +42,6 @@ public class CanidSwordEnemyBehavior : CharacterStat
 	{
 		//When you get enabled, don't have the attack hitbox enabled!
 		attackBox.SetActive(false);
-		alerted = false;
 	}
 
 	private void DetermineState()
@@ -57,12 +58,6 @@ public class CanidSwordEnemyBehavior : CharacterStat
 			modifiedDistance.x = swordMirrorDistance * -Mathf.Sign(wc.directionalInput.x);
 			attackBox.transform.localPosition = modifiedDistance;
 		}
-
-		//Searching for the player
-		if (!alerted)
-		{
-			SearchForThePlayer();
-		}
 	}
 
 	public bool CannotFlip { get =>
@@ -75,22 +70,6 @@ public class CanidSwordEnemyBehavior : CharacterStat
 			animator.GetCurrentAnimatorStateInfo(0).IsTag("atk")
 			|| animator.GetCurrentAnimatorStateInfo(0).IsTag("uncn");
 			}
-
-	private void SearchForThePlayer()
-	{
-		//Which way are we facing? We can only look ahead.
-		bool facingRight = bodySprite.flipX;
-		bool ahead = facingRight == transform.position.x < thePlayer.transform.position.x;
-
-		if (ahead)
-		{
-			//Debug.Log("I might see you....");
-			//We want to find collisions either with the player, or against obstacles.
-			int layerMask = (1 << 9) + (1 << 8);
-		}
-		
-
-	}
 
 	protected override void OnStagger(int amount, Vector2 direction)
 	{

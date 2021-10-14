@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 1494205538}
   - component: {fileID: 1494205532}
   - component: {fileID: 1494205539}
+  - component: {fileID: 1494205540}
   m_Layer: 0
   m_Name: EnemySword
   m_TagString: Enemy
@@ -329,7 +330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charMetrics:
-    health: 123
+    health: 212
     stamina: 45
     equipLoad: 0
     weight: 0
@@ -356,6 +357,7 @@ MonoBehaviour:
   staminaRegenPerSec: 34
   footingRegenPerSec: 10
   attackBox: {fileID: 2756618341423167754}
+  bodySprite: {fileID: 2756618341631061881}
 --- !u!114 &1494205539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,3 +379,18 @@ MonoBehaviour:
   directionalInput: {x: 0, y: 0}
   timeToStop1Unit: 3
   timeToStop1UnitAir: 12
+--- !u!114 &1494205540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756618342194465215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac8b6e20e7e41854587b7953f7751c4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSightDistance: 8
+  alerted: 0
+  spriteFacingSource: {fileID: 2756618341631061881}
