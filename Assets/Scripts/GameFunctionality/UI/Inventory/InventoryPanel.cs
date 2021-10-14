@@ -59,23 +59,8 @@ public class InventoryPanel : MonoBehaviour
                 for (int i = 0; i < items.Count; i++)
                 {
                     var item = Instantiate(inventoryItemPrefab, this.transform);
-                    //var iItem = item.transform.GetChild(1).gameObject;
-                    //var inventoryItemCompoent = iItem.
-
                     item.transform.Find("ButtonManager").gameObject.GetComponent<InventoryItem>().SetUpItem(items[i]);
                     renderedInventoryItems.Add(item);
-
-                    //var iconSprite = Sprite.Create(items[i].inventoryImage, new Rect(new Vector2(), new Vector2(200f, 200f)), new Vector2());
-
-                    ////var panel = this.transform.GetChild(i);
-                    //GameObject icon = new GameObject(items[i].name);
-                    //var button = icon.AddComponent<Button>();
-
-                    //var image = icon.AddComponent<Image>();
-                    //image.transform.localScale = new Vector3(1f, 1f);
-                    //image.sprite = iconSprite;
-
-                    //renderedInventoryItems.Add(Instantiate(icon, parent: this.transform));
                 }
 
                 // after we render this, we won't render it again.
