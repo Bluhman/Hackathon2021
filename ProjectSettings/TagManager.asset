@@ -7,6 +7,7 @@ TagManager:
   - ThruPlatform
   - Enemy
   - Attack
+  - Activation
   layers:
   - Default
   - TransparentFX
