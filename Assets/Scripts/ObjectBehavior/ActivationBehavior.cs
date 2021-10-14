@@ -11,6 +11,7 @@ public class ActivationBehavior : MonoBehaviour
 	[HideInInspector]
 	public bool usable;
 
+	public Animator[] affectedAnimators;
 	public bool isOn;
 	public string switchText;
 	public string switchOffText;
@@ -21,7 +22,7 @@ public class ActivationBehavior : MonoBehaviour
 	{
 		usable = true;
 		animator = GetComponent<Animator>();
-		animator.SetBool("on", isOn);
+		alterOnState(isOn);
 	}
 
 	private void BecomeUsable()
@@ -32,12 +33,22 @@ public class ActivationBehavior : MonoBehaviour
 	public void Use()
 	{
 		if (!usable) return;
-		isOn = !isOn;
-		animator.SetBool("on", isOn);
+		alterOnState(!isOn);
 		usable = false;
 		if (cooldownDuration > 0)
 		{
 			Invoke("BecomeUsable", cooldownDuration);
+		}
+
+	}
+
+	private void alterOnState(bool newState)
+	{
+		isOn = newState;
+		animator.SetBool("on", isOn);
+		foreach (var anim in affectedAnimators)
+		{
+			anim.SetBool("on", isOn);
 		}
 	}
 }

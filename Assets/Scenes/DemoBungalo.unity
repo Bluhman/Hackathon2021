@@ -539,7 +539,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 176044677}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2543,6 +2543,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8510552092106776691, guid: c61785b2740f5104d8dcd0a564a66919, type: 3}
+      propertyPath: affectedAnimators.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8510552092106776691, guid: c61785b2740f5104d8dcd0a564a66919, type: 3}
+      propertyPath: affectedAnimators.Array.data[0]
+      value: 
+      objectReference: {fileID: 1089642651}
     - target: {fileID: 8510552092106776702, guid: c61785b2740f5104d8dcd0a564a66919, type: 3}
       propertyPath: m_Name
       value: GreenLever
@@ -7325,8 +7333,9 @@ GameObject:
   - component: {fileID: 1089642650}
   - component: {fileID: 1089642649}
   - component: {fileID: 1089642648}
+  - component: {fileID: 1089642651}
   m_Layer: 9
-  m_Name: TRIGGEREDPLATFORM
+  m_Name: GreenPlatform
   m_TagString: ThruPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7340,7 +7349,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1089642646}
   m_LocalRotation: {x: 0, y: 0, z: -0.34447905, w: 0.938794}
-  m_LocalPosition: {x: 93.18, y: 14.93, z: 0}
+  m_LocalPosition: {x: 93.18, y: 14.9, z: 0}
   m_LocalScale: {x: 5.71, y: 0.5, z: 0.76}
   m_Children: []
   m_Father: {fileID: 1706989710}
@@ -7422,6 +7431,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1089642646}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!95 &1089642651
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089642646}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0b6b9e9a862009b4da0758e0db9c14aa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1092561188
 GameObject:
   m_ObjectHideFlags: 0
