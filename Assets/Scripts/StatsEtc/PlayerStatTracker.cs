@@ -36,6 +36,9 @@ public class PlayerStatTracker : CharacterStat
    public Slider HPBarSlider;
    public Slider StaminaBarSlider;
 
+   //This reference asset ties into the charMetrics.
+   public IntReference playerCurrentHealthReference;
+
    int itemDiscovery;
    PlayerController pc;
    Inventory inv;
@@ -69,6 +72,8 @@ public class PlayerStatTracker : CharacterStat
    public override void Update()
 	{
       base.Update();
+
+      playerCurrentHealthReference.value = charMetrics.currentHealth;
 
       StaminaBarSlider.value = Mathf.Lerp(StaminaBarSlider.value, charMetrics.currentStamina, 0.1f);
       HPBarSlider.value = Mathf.Lerp(HPBarSlider.value, charMetrics.currentHealth, 0.1f);
