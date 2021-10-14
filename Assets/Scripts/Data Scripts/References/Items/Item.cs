@@ -18,4 +18,5 @@ public class Item
 	public string name;
 	public string description_short;
 	public string description_long;
+	public Texture2D inventoryImage;
 }

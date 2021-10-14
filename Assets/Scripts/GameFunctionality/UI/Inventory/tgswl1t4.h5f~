@@ -1,0 +1,72 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class InventoryPanel : MonoBehaviour
+{
+    public BoolReference isVisible;
+    private bool wasRendered = false;
+    public ItemListReference playerInventory;
+    public WeaponDatabase WeaponDatabase;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        foreach (var i in WeaponDatabase.value)
+        {
+            playerInventory.value.Add(i);
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        UpdateInventory();
+    }
+
+    public void onClose()
+    {
+        wasRendered = false;
+
+    }
+
+    private void UpdateInventory()
+    {
+        // is the panel open
+        if (isVisible)
+        {
+            // has this panel already been rendered since opening the slot (so we dont loop this for no reason)
+            if (!wasRendered)
+            {
+                var items = GetInventory();
+                Debug.LogWarning($"Got Inventory {items.Count}");
+
+                // iterate through the inventory
+                for (int i = 0; i < items.Count; i++)
+                {
+                    Debug.LogWarning($"Building Inventory {i} - {items[i].name}");
+                    var panel = this.transform.GetChild(i);
+
+                    Debug.LogWarning($"The image of the inventoryItem is {items[i].inventoryImage.name}");
+
+                    Debug.LogWarning("Getting the Image of the Panel");
+                    var image = panel.GetComponent<Image>();
+
+                    Debug.LogWarning("Setting the Image of the Panel");
+                    image.sprite = Sprite.Create(items[i].inventoryImage, new Rect(new Vector2(1f, 1f), new Vector2(30f, 30f)), new Vector2());
+                }
+
+                // after we render this, we won't render it again.
+                wasRendered = true;
+            }
+        }
+    }
+
+    private List<Item> GetInventory()
+    {
+        return playerInventory.value;   
+    }
+
+
+}

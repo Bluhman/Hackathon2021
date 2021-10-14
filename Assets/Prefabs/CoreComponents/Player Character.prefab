@@ -903,6 +903,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   HPBarSlider: {fileID: 0}
   StaminaBarSlider: {fileID: 0}
+  playerCurrentHealthReference: {fileID: 11400000, guid: 65d44af9cd7595448aaa3fe07d3acf64, type: 2}
 --- !u!114 &998406055765105005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -924,6 +925,7 @@ MonoBehaviour:
     name: 
     description_short: 
     description_long: 
+    inventoryImage: {fileID: 0}
     statRequirements:
       vigor: 0
       poise: 0

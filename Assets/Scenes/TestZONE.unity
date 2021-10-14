@@ -160,7 +160,7 @@ Transform:
   - {fileID: 1873486301}
   - {fileID: 274319986}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &46763075
 GameObject:
@@ -586,7 +586,7 @@ GameObject:
   - component: {fileID: 531143070}
   - component: {fileID: 531143069}
   m_Layer: 0
-  m_Name: EventSystem
+  m_Name: CharacterSheetEventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2141,7 +2141,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3382206524616287517, guid: 9deed252cae4270419c6840e20f36989, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3382206524616287517, guid: 9deed252cae4270419c6840e20f36989, type: 3}
       propertyPath: m_LocalPosition.x

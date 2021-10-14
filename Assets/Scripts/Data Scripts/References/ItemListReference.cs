@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "References/Items/Item List Reference")]
 public class ItemListReference : ScriptableObject
 {
-    [SerializeField] public Item[] value;
+    [SerializeField] public List<Item> value;
 }

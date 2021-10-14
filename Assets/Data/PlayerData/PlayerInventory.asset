@@ -15,6 +15,13 @@ MonoBehaviour:
   value:
   - itemType: 0
     id: 0
-    name: 
-    description_short: 
-    description_long: 
+    name: Spear
+    description_short: Pokes
+    description_long: Pokes very well
+    inventoryImage: {fileID: 2800000, guid: 3c5db4d6aa220dd45b53da6a22ba4178, type: 3}
+  - itemType: 0
+    id: 1
+    name: Axe
+    description_short: Chops
+    description_long: Chops very well
+    inventoryImage: {fileID: 2800000, guid: 182822da58dddd64b9a691719e3eb856, type: 3}
