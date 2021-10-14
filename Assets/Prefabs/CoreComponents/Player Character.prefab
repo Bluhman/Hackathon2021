@@ -327,6 +327,7 @@ MonoBehaviour:
   weaponOffsetCrouching: {x: 0.33, y: -0.61}
   maxJumps: 2
   animator: {fileID: 0}
+  activatorObject: {fileID: 1178744240}
   bodySprite: {fileID: 6794094869273346546}
   clothingSprite: {fileID: 6794094868674669975}
 --- !u!114 &6794094869180728176
