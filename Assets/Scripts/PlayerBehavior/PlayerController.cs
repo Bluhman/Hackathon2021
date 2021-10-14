@@ -30,6 +30,7 @@ public class PlayerController : WalkingController
 	PlayerStatTracker stats;
 	Inventory equipmentState;
 
+	public GameObject activatorObject;
 	public SpriteRenderer bodySprite;
 	public SpriteRenderer clothingSprite;
 
@@ -51,6 +52,11 @@ public class PlayerController : WalkingController
 		if (stats.charMetrics.currentStamina <= 0 && _dashing)
 		{
 			OnDash(false);
+		}
+
+		if (activatorObject != null)
+		{
+			activatorObject.SetActive(!CannotInteract);
 		}
 
 		DeterminePlayerState();
@@ -109,6 +115,10 @@ public class PlayerController : WalkingController
 	public bool CannotAttack { get => animator.GetCurrentAnimatorStateInfo(0).IsTag("atk")
 			|| UnresponsiveToInput;
 	}
+
+	public bool CannotInteract {
+		get => UnresponsiveToInput || CannotAttack || getIsAirborne();
+			}
 
 	public void OnDash(bool press)
 	{

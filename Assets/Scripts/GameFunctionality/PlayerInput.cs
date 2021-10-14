@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
 	PlayerController player;
+	public PlayerActivationInteractor playerInteract;
 	public float doubleTapDashTimingWindow = 0.25f;
 
 	void Start()
@@ -41,6 +42,11 @@ public class PlayerInput : MonoBehaviour
 		if (Input.GetButtonDown("Fire1"))
 		{
 			player.OnAttack();
+		}
+
+		if (Input.GetButtonDown("Use"))
+		{
+			playerInteract.OnActivate();
 		}
 	}
 }
