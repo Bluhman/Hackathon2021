@@ -497,9 +497,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1494205532, guid: c335ef206c324c94ab3373e30fcf001b, type: 3}
-      propertyPath: bodySprite
-      value: 
-      objectReference: {fileID: 2044489679}
+      propertyPath: charMetrics.health
+      value: 5000
+      objectReference: {fileID: 0}
     - target: {fileID: 2756618342194465200, guid: c335ef206c324c94ab3373e30fcf001b, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1747,11 +1747,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2006292638}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!212 &2044489679 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 2756618341631061881, guid: c335ef206c324c94ab3373e30fcf001b, type: 3}
-  m_PrefabInstance: {fileID: 514414531}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3974264915414997275
 PrefabInstance:
   m_ObjectHideFlags: 0
