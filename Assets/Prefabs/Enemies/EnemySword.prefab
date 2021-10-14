@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2756618341423167754}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.46, y: 0.7, z: 0}
+  m_LocalScale: {x: 2.39, y: 2.47, z: 1}
   m_Children: []
   m_Father: {fileID: 2756618342194465200}
   m_RootOrder: 1
@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 2756618342194465203}
   - component: {fileID: 1494205538}
   - component: {fileID: 1494205532}
+  - component: {fileID: 1494205539}
   m_Layer: 0
   m_Name: EnemySword
   m_TagString: Enemy
@@ -355,3 +356,24 @@ MonoBehaviour:
   staminaRegenPerSec: 34
   footingRegenPerSec: 10
   attackBox: {fileID: 2756618341423167754}
+--- !u!114 &1494205539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756618342194465215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7501867f7f7e77244962eace3d6fe52d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxJumpHeight: 3
+  minJumpHeight: 0.5
+  timeToJumpApex: 0.35
+  moveSpeed: 6
+  terminalVelocity: 0
+  velocity: {x: 0, y: 0, z: 0}
+  directionalInput: {x: 0, y: 0}
+  timeToStop1Unit: 3
+  timeToStop1UnitAir: 12
