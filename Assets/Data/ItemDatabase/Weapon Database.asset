@@ -18,6 +18,7 @@ MonoBehaviour:
     name: Spear
     description_short: Pokes
     description_long: Pokes very well
+    inventoryImage: {fileID: 2800000, guid: 3c5db4d6aa220dd45b53da6a22ba4178, type: 3}
     statRequirements:
       vigor: 0
       poise: 0
@@ -34,5 +35,29 @@ MonoBehaviour:
     intScaling: 0
     wilScaling: 0
     weight: 1.7
+    staminaCost: 14
+    spawnPositionCrouching: {x: -0.18, y: -0.28}
+  - itemType: 0
+    id: 1
+    name: Axe
+    description_short: Chops
+    description_long: Chops very well
+    inventoryImage: {fileID: 2800000, guid: 182822da58dddd64b9a691719e3eb856, type: 3}
+    statRequirements:
+      vigor: 0
+      poise: 0
+      endurance: 0
+      strength: 0
+      agility: 0
+      intelligence: 0
+      willpower: 0
+      luck: 0
+    attackEffectPrefabName: SpearAttack
+    animationCategory: 1
+    strScaling: 0
+    agiScaling: 0
+    intScaling: 0
+    wilScaling: 0
+    weight: 2.5
     staminaCost: 14
     spawnPositionCrouching: {x: -0.18, y: -0.28}
