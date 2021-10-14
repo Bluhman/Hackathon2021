@@ -178,10 +178,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2756618342194465200}
   - component: {fileID: 2756618342194465201}
-  - component: {fileID: 2756618342194465214}
   - component: {fileID: 2756618342194465205}
   - component: {fileID: 2756618342194465202}
   - component: {fileID: 2756618342194465203}
+  - component: {fileID: 1494205538}
+  - component: {fileID: 1494205532}
   m_Layer: 0
   m_Name: EnemySword
   m_TagString: Enemy
@@ -231,45 +232,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.88}
   m_EdgeRadius: 0
---- !u!114 &2756618342194465214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2756618342194465215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc3eaba8e7e796c4e86505237b11e019, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  charMetrics:
-    health: 612
-    stamina: 45
-    equipLoad: 0
-    weight: 0
-    footing: 0
-    balance: 0
-    damageResistances:
-      crushing: 0
-      slashing: 0
-      piercing: 0
-      mystical: 0
-      fire: 0
-      electric: 0
-      frost: 0
-      dark: 0
-    statusResistances:
-      injury: 0
-      exhaustion: 0
-      poison: 0
-      venom: 0
-      curse: 0
-      chill: 0
-      petrify: 0
-      banish: 0
-  staminaRegenPerSec: 34
-  footingRegenPerSec: 10
 --- !u!114 &2756618342194465205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,3 +294,64 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1494205538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756618342194465215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17086fac19e8b4445a93432507c25296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activationDistance:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 10.5, y: 7.5, z: 1}
+  deactivationDistance:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 17.63, y: 12.3, z: 1}
+  targetScript: {fileID: 1494205532}
+  onLeaveRange: 1
+  offscreenPadding: 0
+--- !u!114 &1494205532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756618342194465215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f5753f6d2f8e64295c6253902a3108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charMetrics:
+    health: 123
+    stamina: 45
+    equipLoad: 0
+    weight: 0
+    footing: 1
+    balance: 1
+    damageResistances:
+      crushing: 0
+      slashing: 0
+      piercing: 0
+      mystical: 0
+      fire: 0
+      electric: 0
+      frost: 0
+      dark: 0
+    statusResistances:
+      injury: 0
+      exhaustion: 0
+      poison: 0
+      venom: 0
+      curse: 0
+      chill: 0
+      petrify: 0
+      banish: 0
+  staminaRegenPerSec: 34
+  footingRegenPerSec: 10
+  attackBox: {fileID: 2756618341423167754}
