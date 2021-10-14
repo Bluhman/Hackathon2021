@@ -380,6 +380,7 @@ MonoBehaviour:
   charMetrics:
     health: 450
     stamina: 80
+    currentHealthReference: {fileID: 11400000, guid: 65d44af9cd7595448aaa3fe07d3acf64, type: 2}
     equipLoad: 50
     weight: 0
     footing: 0
@@ -407,6 +408,7 @@ MonoBehaviour:
   level0Metrics:
     health: 420
     stamina: 80
+    currentHealthReference: {fileID: 11400000, guid: 65d44af9cd7595448aaa3fe07d3acf64, type: 2}
     equipLoad: 50
     weight: 0
     footing: 0
@@ -432,6 +434,7 @@ MonoBehaviour:
   level100Metrics:
     health: 2000
     stamina: 255
+    currentHealthReference: {fileID: 11400000, guid: 65d44af9cd7595448aaa3fe07d3acf64, type: 2}
     equipLoad: 200
     weight: 0
     footing: 30
@@ -924,6 +927,7 @@ MonoBehaviour:
     name: 
     description_short: 
     description_long: 
+    inventoryImage: {fileID: 0}
     statRequirements:
       vigor: 0
       poise: 0

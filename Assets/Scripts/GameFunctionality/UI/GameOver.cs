@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameOver : MonoBehaviour
 {
+    public IntReference playerHp;
     public int gameOverFramesDelay = 60;
-
 
     GameObject showHide;
     int currentFrameDelay = 0;
@@ -20,14 +20,14 @@ public class GameOver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (1 < 1)
+        if (playerHp.value < 1)
         {
-            currentFrameDelay++;
-
             if (currentFrameDelay >= gameOverFramesDelay)
             {
-                gameObject.SetActive(true);
+                showHide.SetActive(true);
             }
+
+            currentFrameDelay++;
         }
         else
         {

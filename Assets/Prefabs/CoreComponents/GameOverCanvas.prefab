@@ -304,3 +304,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4422fb364e3a1e4b9bb2681251f14f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHp: {fileID: 11400000, guid: 65d44af9cd7595448aaa3fe07d3acf64, type: 2}
+  gameOverFramesDelay: 60
