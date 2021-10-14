@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterScreen : MonoBehaviour
 {
+    public IntReference playerHealth;
     public BoolReference boolReference;
     GameObject inventoryVisible;
 
@@ -20,10 +21,17 @@ public class CharacterScreen : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            Debug.Log("Pushed I");
-
-            inventoryVisible.SetActive(!boolReference.value);
-            boolReference.value = !boolReference.value;
+            if (playerHealth.value > 0)
+            {
+                inventoryVisible.SetActive(!boolReference.value);
+                boolReference.value = !boolReference.value;
+            }
+            else
+            {
+                // can't open inventory if you're dead.
+                inventoryVisible.SetActive(false);
+                boolReference.value = false;
+            }
         }    
     }
 }
