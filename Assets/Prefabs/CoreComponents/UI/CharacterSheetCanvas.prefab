@@ -316,6 +316,7 @@ MonoBehaviour:
   playerInventory: {fileID: 11400000, guid: 26fa25a183255744399de5cb5fea70ec, type: 2}
   weaponDatabase: {fileID: 11400000, guid: 7300c1704b4034f4c935992106a91c68, type: 2}
   inventoryItemPrefab: {fileID: 1533838094852684928, guid: a8d7c96b36e5e854ba3441d11e1bd8ed, type: 3}
+  needToRerenderInventory: {fileID: 11400000, guid: 4e36ab894fe7c3a418ae8a17fdcab451, type: 2}
 --- !u!114 &2801081091163160542
 MonoBehaviour:
   m_ObjectHideFlags: 0

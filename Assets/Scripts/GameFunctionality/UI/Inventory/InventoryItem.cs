@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class InventoryItem : MonoBehaviour
     public ItemListReference playerInventory;
     public WeaponDatabase weaponDb;
     public IntReference weaponId;
+    public BoolReference needToRerenderInventory;
 
     private Transform parent;
     private GameObject image;
@@ -29,7 +31,11 @@ public class InventoryItem : MonoBehaviour
     { 
         if (this.item.itemType == ItemType.Weapon)
         {
-            weaponId.value = item.id;
+            int oldWeaponId = weaponId.value;
+            weaponId.value = item.id;     
+            playerInventory.value = playerInventory.value.Where(a => a.id != weaponId.value).ToList();
+            playerInventory.value.Add(weaponDb.value.FirstOrDefault(a => a.id == oldWeaponId));
+            needToRerenderInventory.value = true;
         }
     }
 

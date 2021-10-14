@@ -192,6 +192,7 @@ MonoBehaviour:
   playerInventory: {fileID: 11400000, guid: 26fa25a183255744399de5cb5fea70ec, type: 2}
   weaponDb: {fileID: 11400000, guid: 7300c1704b4034f4c935992106a91c68, type: 2}
   weaponId: {fileID: 11400000, guid: 1979fb536e7c7a344b21814e7a6dddcc, type: 2}
+  needToRerenderInventory: {fileID: 11400000, guid: 4e36ab894fe7c3a418ae8a17fdcab451, type: 2}
 --- !u!1 &6661314048475145470
 GameObject:
   m_ObjectHideFlags: 0

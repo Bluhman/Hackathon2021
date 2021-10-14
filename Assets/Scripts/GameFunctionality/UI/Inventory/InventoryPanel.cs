@@ -10,9 +10,9 @@ public class InventoryPanel : MonoBehaviour
     public ItemListReference playerInventory;
     public WeaponDatabase weaponDatabase;
     public GameObject inventoryItemPrefab;
+    public BoolReference needToRerenderInventory;
 
     List<GameObject> renderedInventoryItems;
-    bool wasRendered;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +32,7 @@ public class InventoryPanel : MonoBehaviour
 
     private void OnDisable()
     {
-        wasRendered = false;
+        needToRerenderInventory.value = true;
         foreach (var i in renderedInventoryItems)
         {
             Destroy(i);
@@ -51,8 +51,13 @@ public class InventoryPanel : MonoBehaviour
         if (isVisible)
         {
             // has this panel already been rendered since opening the slot (so we dont loop this for no reason)
-            if (!wasRendered)
+            if (needToRerenderInventory.value)
             {
+                foreach (var i in renderedInventoryItems)
+                {
+                    Destroy(i);
+                }
+
                 var items = GetInventory();
 
                 // iterate through the inventory
@@ -64,7 +69,7 @@ public class InventoryPanel : MonoBehaviour
                 }
 
                 // after we render this, we won't render it again.
-                wasRendered = true;
+                needToRerenderInventory.value = false;
             }
         }
     }
