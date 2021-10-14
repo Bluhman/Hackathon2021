@@ -10,9 +10,9 @@ public class InventoryPanel : MonoBehaviour
     public ItemListReference playerInventory;
     public WeaponDatabase weaponDatabase;
     public GameObject inventoryItemPrefab;
-    public BoolReference needToRerenderInventory;
 
     List<GameObject> renderedInventoryItems;
+    bool wasRendered;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +32,7 @@ public class InventoryPanel : MonoBehaviour
 
     private void OnDisable()
     {
-        needToRerenderInventory.value = true;
+        wasRendered = false;
         foreach (var i in renderedInventoryItems)
         {
             Destroy(i);
@@ -51,25 +51,33 @@ public class InventoryPanel : MonoBehaviour
         if (isVisible)
         {
             // has this panel already been rendered since opening the slot (so we dont loop this for no reason)
-            if (needToRerenderInventory.value)
+            if (!wasRendered)
             {
-                foreach (var i in renderedInventoryItems)
-                {
-                    Destroy(i);
-                }
-
                 var items = GetInventory();
 
                 // iterate through the inventory
                 for (int i = 0; i < items.Count; i++)
                 {
+
                     var item = Instantiate(inventoryItemPrefab, this.transform);
-                    item.transform.Find("ButtonManager").gameObject.GetComponent<InventoryItem>().SetUpItem(items[i]);
+                    item.transform.GetChild(1).GetComponent<InventoryItem>().SetUpItem(items[i]);
                     renderedInventoryItems.Add(item);
+
+                    //var iconSprite = Sprite.Create(items[i].inventoryImage, new Rect(new Vector2(), new Vector2(200f, 200f)), new Vector2());
+
+                    ////var panel = this.transform.GetChild(i);
+                    //GameObject icon = new GameObject(items[i].name);
+                    //var button = icon.AddComponent<Button>();
+
+                    //var image = icon.AddComponent<Image>();
+                    //image.transform.localScale = new Vector3(1f, 1f);
+                    //image.sprite = iconSprite;
+
+                    //renderedInventoryItems.Add(Instantiate(icon, parent: this.transform));
                 }
 
                 // after we render this, we won't render it again.
-                needToRerenderInventory.value = false;
+                wasRendered = true;
             }
         }
     }
