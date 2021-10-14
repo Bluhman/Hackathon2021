@@ -17,12 +17,7 @@ public class InventoryPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //this needs to go at some point
-        playerInventory.value = new List<Item>();
-        foreach (var i in weaponDatabase.value)
-        {
-            playerInventory.value.Add(i);
-        }
+
     }
 
     private void OnEnable()

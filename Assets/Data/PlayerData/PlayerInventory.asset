@@ -14,12 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value:
   - itemType: 0
-    id: 0
-    name: Spear
-    description_short: Pokes
-    description_long: Pokes very well
-    inventoryImage: {fileID: 2800000, guid: 3c5db4d6aa220dd45b53da6a22ba4178, type: 3}
-  - itemType: 0
     id: 1
     name: Axe
     description_short: Chops

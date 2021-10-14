@@ -18,9 +18,7 @@ public class InfoPanel : MonoBehaviour
 
     void Start()
     {
-        itemName = this.transform.GetChild(0).gameObject.GetComponent<Text>();
-        itemImage = this.transform.GetChild(1).gameObject.GetComponent<Image>();
-        itemDescription = this.transform.GetChild(3).gameObject.GetComponent<Text>();        
+     
     }
 
     // Update is called once per frame
@@ -35,6 +33,10 @@ public class InfoPanel : MonoBehaviour
 
     private void OnEnable()
     {
+        itemName = this.transform.GetChild(0).gameObject.GetComponent<Text>();
+        itemImage = this.transform.GetChild(1).gameObject.GetComponent<Image>();
+        itemDescription = this.transform.GetChild(3).gameObject.GetComponent<Text>();
+
         item.value = weaponDb.value.FirstOrDefault(a => a.id == equippedWeapon.value);
         currentItemId = item.value.id;
         SetItemInfo();
