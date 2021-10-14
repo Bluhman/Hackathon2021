@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameOver : MonoBehaviour
 {
     public IntReference playerHp;
-    public int gameOverFramesDelay = 60;
+    public int gameOverFramesDelay = 240;
     public int restartSceneDelay = 1200;
 
     GameObject showHide;

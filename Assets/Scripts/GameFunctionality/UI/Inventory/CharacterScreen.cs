@@ -19,19 +19,21 @@ public class CharacterScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (playerHealth.value > 0)
         {
-            if (playerHealth.value > 0)
+            if (Input.GetKeyDown(KeyCode.I))
             {
+
                 inventoryVisible.SetActive(!boolReference.value);
                 boolReference.value = !boolReference.value;
             }
-            else
-            {
-                // can't open inventory if you're dead.
-                inventoryVisible.SetActive(false);
-                boolReference.value = false;
-            }
-        }    
+
+        }
+        else
+        {
+            // can't open inventory if you're dead.
+            inventoryVisible.SetActive(false);
+            boolReference.value = false;
+        }
     }
 }

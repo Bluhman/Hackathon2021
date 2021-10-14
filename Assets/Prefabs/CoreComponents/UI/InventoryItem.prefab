@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2094295494822635216}
   - component: {fileID: 8968410782622629628}
   - component: {fileID: 530784215650752469}
+  - component: {fileID: 1877890093059714010}
   m_Layer: 5
   m_Name: InventoryItem
   m_TagString: Untagged
@@ -31,7 +32,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5015294272123742928}
-  - {fileID: 8376803646169869573}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7517200341144542321}
+      - m_Target: {fileID: 1877890093059714010}
         m_TargetAssemblyTypeName: InventoryItem, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
@@ -134,49 +134,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!1 &2440610647049782466
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8376803646169869573}
-  - component: {fileID: 7517200341144542321}
-  m_Layer: 5
-  m_Name: ButtonManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &8376803646169869573
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2440610647049782466}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5041683611173852646}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.3031, y: -0}
-  m_SizeDelta: {x: 34.7441, y: 35.3502}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7517200341144542321
+--- !u!114 &1877890093059714010
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2440610647049782466}
+  m_GameObject: {fileID: 1533838094852684928}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 472b6814f1cfef9449d02be35a8a16be, type: 3}
@@ -189,6 +153,7 @@ MonoBehaviour:
     description_short: 
     description_long: 
     inventoryImage: {fileID: 0}
+  itemReference: {fileID: 11400000, guid: aa67380fd7951d54bbf41a73e82d05ba, type: 2}
   playerInventory: {fileID: 11400000, guid: 26fa25a183255744399de5cb5fea70ec, type: 2}
   weaponDb: {fileID: 11400000, guid: 7300c1704b4034f4c935992106a91c68, type: 2}
   weaponId: {fileID: 11400000, guid: 1979fb536e7c7a344b21814e7a6dddcc, type: 2}

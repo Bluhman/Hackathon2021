@@ -64,7 +64,7 @@ public class InventoryPanel : MonoBehaviour
                 for (int i = 0; i < items.Count; i++)
                 {
                     var item = Instantiate(inventoryItemPrefab, this.transform);
-                    item.transform.Find("ButtonManager").gameObject.GetComponent<InventoryItem>().SetUpItem(items[i]);
+                    item.gameObject.GetComponent<InventoryItem>().SetUpItem(items[i]);
                     renderedInventoryItems.Add(item);
                 }
 
