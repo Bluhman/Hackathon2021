@@ -10,20 +10,17 @@ public class BaseMetrics
 	public int stamina;
 	int _currentHealth;
 	int _currentStamina;
-
-	public IntReference currentHealthReference;
-
 	public int currentHealth
 	{
-		get => currentHealthReference.value;
+		get => _currentHealth;
 		set
 		{
-			currentHealthReference.value = Mathf.Clamp(value, 0, health);
+			_currentHealth = Mathf.Clamp(value, 0, health);
 		}
 	}
 	public bool isDead
 	{
-		get => currentHealthReference.value <= 0;
+		get => _currentHealth <= 0;
 	}
 	public int currentStamina
 	{
@@ -55,7 +52,7 @@ public class BaseMetrics
 
 	public void InitCurrents()
 	{
-		currentHealthReference.value = health;
+		_currentHealth = health;
 		_currentStamina = stamina;
 		_currentFooting = footing;
 	}
