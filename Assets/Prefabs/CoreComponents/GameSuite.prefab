@@ -1067,6 +1067,7 @@ MonoBehaviour:
   target: {fileID: 6602954759533235480}
   focusAreaSize: {x: 3, y: 5}
   lookAreaSize: {x: 5, y: 8}
+  lookBoundaries: {fileID: 0}
   verticalOffset: 0.5
   lookAheadDistX: 2
   smoothTimeX: 0.4
@@ -1626,22 +1627,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6794094869180728181, guid: fbd81019fbe4e64468ebb5f3c19556eb, type: 3}
-      propertyPath: bodySprites.attackCrouchSprites.Array.data[0]
-      value: 
-      objectReference: {fileID: -4167287917553887007, guid: 9d1268b1371db4e4aa67600e0bc41c02, type: 3}
-    - target: {fileID: 6794094869180728181, guid: fbd81019fbe4e64468ebb5f3c19556eb, type: 3}
-      propertyPath: bodySprites.attackCrouchSprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 5115134378900727075, guid: 9d1268b1371db4e4aa67600e0bc41c02, type: 3}
-    - target: {fileID: 6794094869180728181, guid: fbd81019fbe4e64468ebb5f3c19556eb, type: 3}
-      propertyPath: clothingSprites.attackCrouchSprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 38833960d7122344da51018cd8a185b5, type: 3}
-    - target: {fileID: 6794094869180728181, guid: fbd81019fbe4e64468ebb5f3c19556eb, type: 3}
-      propertyPath: clothingSprites.attackCrouchSprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 38833960d7122344da51018cd8a185b5, type: 3}
     - target: {fileID: 6794094869180728185, guid: fbd81019fbe4e64468ebb5f3c19556eb, type: 3}
       propertyPath: m_Name
       value: Player Character
