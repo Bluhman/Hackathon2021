@@ -35,6 +35,11 @@ public class AttackBehavior : MonoBehaviour
       timer = attackLifetime;
     }
 
+	private void OnEnable()
+	{
+      hitTargets = new List<GameObject>();
+   }
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 

@@ -71,20 +71,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crushingDmg: 0
-  slashingDmg: 22
+  slashingDmg: 125
   piercingDmg: 0
   mysticalDmg: 0
   fireDmg: 0
   electricDmg: 0
   frostDmg: 0
   darkDmg: 0
-  staggerStrength: 0
+  staggerStrength: 12
   hittableTargetTags:
   - Player
-  repeatHitTime: 2
+  repeatHitTime: 0
   melee: 1
   dmgAnimationScalar: 1
-  attackLifetime: 0
+  attackLifetime: -1
 --- !u!1 &2756618341631061863
 GameObject:
   m_ObjectHideFlags: 0
