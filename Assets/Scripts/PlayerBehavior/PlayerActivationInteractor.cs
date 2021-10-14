@@ -36,6 +36,22 @@ public class PlayerActivationInteractor : MonoBehaviour
 		OnListChange();
 	}
 
+	public void OnActivate()
+	{
+		if (targetActivations.Count == 0)
+		{
+			return;
+		}
+		var closest = targetActivations[0];
+		var activationGuy = closest.GetComponent<ActivationBehavior>();
+		activationGuy.Use();
+		if (!activationGuy.usable)
+		{
+			targetActivations.Remove(closest);
+			OnListChange();
+		}
+	}
+
 	private void OnListChange()
 	{
 		if (targetActivations.Count == 0)
@@ -65,7 +81,7 @@ public class PlayerActivationInteractor : MonoBehaviour
 			{
 				bDist = activationRange.Distance(bcol).distance;
 			}
-			return bDist.CompareTo(aDist);
+			return aDist.CompareTo(bDist);
 		});
 
 		//After a truly rousing sort job, we then take the leading entry (the closest)

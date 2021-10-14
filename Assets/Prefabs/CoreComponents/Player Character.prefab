@@ -341,6 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5261b337c052b478fc14a7e6c8d8a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInteract: {fileID: 1178744244}
   doubleTapDashTimingWindow: 0.25
 --- !u!50 &5086157756408759466
 Rigidbody2D:

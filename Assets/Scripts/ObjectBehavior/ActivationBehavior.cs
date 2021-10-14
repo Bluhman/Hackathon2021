@@ -29,10 +29,11 @@ public class ActivationBehavior : MonoBehaviour
 		usable = true;
 	}
 
-	public void Use(bool? state)
+	public void Use()
 	{
 		if (!usable) return;
-		isOn = state ?? !isOn;
+		isOn = !isOn;
+		animator.SetBool("on", isOn);
 		usable = false;
 		if (cooldownDuration > 0)
 		{
