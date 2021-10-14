@@ -66,6 +66,8 @@ public class Controller2D : RaycastController
 		float directionX = Mathf.Sign(moveAmount.x);
 		float rayLength = Mathf.Abs(moveAmount.y) + skinWidth;
 
+		collisions.solidGroundLeft = collisions.solidGroundRight = directionY == -1;
+
 		for (int i = 0; i < verticalRayCount; i++)
 		{
 			Vector2 rayOrigin = directionY == -1 ? raycastOrigins.bottomLeft : raycastOrigins.topLeft;
@@ -101,10 +103,22 @@ public class Controller2D : RaycastController
 				collisions.below = directionY == -1;
 				collisions.above = directionY == 1;
 			}
+			else
+			{
+				if (i == 0)
+				{
+					collisions.solidGroundLeft = false;
+				}
+				else if (i == verticalRayCount-1)
+				{
+					collisions.solidGroundRight = false;
+				}
+			}
 		}
 
 		if (collisions.climbingSlope)
 		{
+			collisions.solidGroundLeft = collisions.solidGroundRight = true;
 			rayLength = Mathf.Abs(moveAmount.x) + skinWidth;
 			Vector2 rayOrigin = ((directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight) + Vector2.up * moveAmount.y;
 			RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
@@ -297,6 +311,8 @@ public class Controller2D : RaycastController
 		public bool above, below;
 		public bool left, right;
 
+		public bool solidGroundLeft, solidGroundRight;
+
 		public bool climbingSlope;
 		public bool descendingSlope;
 		public bool slidingDownMaxSlope;
@@ -311,6 +327,7 @@ public class Controller2D : RaycastController
 		{
 			above = below = false;
 			left = right = false;
+			solidGroundLeft = solidGroundRight = false;
 			climbingSlope = false;
 			descendingSlope = false;
 			slidingDownMaxSlope = false;
