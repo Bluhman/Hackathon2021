@@ -8,7 +8,8 @@ using UnityEngine;
 public class CanidSwordEnemyController : WalkingController
 {
 	Animator animator;
-	CharacterStat cs;
+	CharacterStat baseCharacterStats;
+	BaseMetrics baseCharacterMetrics;
 	AwarenessBehavior ab;
 	public GameObject attackBox;
 	public SpriteRenderer bodySprite;
@@ -17,8 +18,24 @@ public class CanidSwordEnemyController : WalkingController
 	float swordMirrorDistance;
 	float xMovementSmoothing;
 	bool alerted;
-	bool block;
+	bool _block;
 	float actionTimer = 0;
+
+	bool blocking
+	{
+		get => _block;
+		set {
+			_block = value;
+			if (_block)
+			{
+
+			}
+			else
+			{
+
+			}
+		}
+	}
 
 	// Start is called before the first frame update
 	public override void Start()
@@ -26,9 +43,9 @@ public class CanidSwordEnemyController : WalkingController
 		base.Start();
 
 		animator = GetComponent<Animator>();
-		cs = GetComponent<CharacterStat>();
+		baseCharacterStats = GetComponent<CharacterStat>();
 		ab = GetComponent<AwarenessBehavior>();
-
+		baseCharacterMetrics = baseCharacterStats.charMetrics;
 
 		swordMirrorDistance = attackBox.transform.localPosition.x;
 	}
@@ -121,7 +138,7 @@ public class CanidSwordEnemyController : WalkingController
 	{
 		//Face towards player and raise shield.
 		ab.FacePlayer();
-		block = true;
+		blocking = true;
 	}
 
 	private void OnEnable()
@@ -132,17 +149,18 @@ public class CanidSwordEnemyController : WalkingController
 
 	private void DetermineState()
 	{
-		animator.SetBool("isDead", cs.charMetrics.isDead);
+		animator.SetBool("isDead", baseCharacterStats.charMetrics.isDead);
 		animator.SetBool("walking", directionalInput.x != 0);
 		animator.SetFloat("walkingSpeed", Math.Abs(velocity.x));
 		animator.SetBool("inAir", getIsAirborne());
+		animator.SetBool("facingRight", bodySprite.flipX);
 
 		if (CannotMove)
 		{
-			block = false;
+			_block = false;
 		}
 
-		animator.SetBool("blocking", block);
+		animator.SetBool("blocking", _block);
 
 		if (directionalInput.x != 0 && !CannotFlip)
 		{

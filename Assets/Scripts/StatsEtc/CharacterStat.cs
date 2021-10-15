@@ -16,7 +16,9 @@ public class CharacterStat : MonoBehaviour
 	protected float staminaRegenMultiplier = 1;
 	float damageMultiplier = 1;
 	float healingMultiplier = 1;
-	DamageResistances temporaryResistances;
+
+	public DamageResistances blockResistances;
+	public float blockFootingScalar = 0.5f;
 
 	BoxCollider2D hitbox;
 

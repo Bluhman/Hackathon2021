@@ -57,6 +57,27 @@ public class AttackBehavior : MonoBehaviour
             if (stats != null)
 				{
                var drs = stats.charMetrics.damageResistances;
+               var blockMetrics = stats.blockResistances;
+               var footingMultiplier = 1.0f;
+               //One caveat... we need to have it so that a block reduces the damage.
+               //To do this, we have to take the animation component of our hit target.
+               var anim = collision.gameObject.GetComponent<Animator>();
+               if (anim != null
+                  && anim.GetCurrentAnimatorStateInfo(0).IsTag("block")
+                  && anim.GetBool("facingRight") == transform.position.x < collision.transform.position.x
+                  )
+               {
+                  drs.crushing += blockMetrics.crushing;
+                  drs.slashing += blockMetrics.slashing;
+                  drs.piercing += blockMetrics.piercing;
+                  drs.mystical += blockMetrics.mystical;
+                  drs.fire += blockMetrics.fire;
+                  drs.frost += blockMetrics.frost;
+                  drs.electric += blockMetrics.electric;
+                  drs.dark += blockMetrics.dark;
+                  footingMultiplier *= stats.blockFootingScalar;
+               }
+
                //Calculate damage output in response to the defenses and status on the target.
                int mitigatedCrushingDmg = Mathf.RoundToInt(crushingDmg * (1f - drs.crushing) * dmgAnimationScalar);
                int mitigatedSlashingDmg = Mathf.RoundToInt(slashingDmg * (1f - drs.slashing) * dmgAnimationScalar);
@@ -66,6 +87,9 @@ public class AttackBehavior : MonoBehaviour
                int mitigatedElectricDmg = Mathf.RoundToInt(electricDmg * (1f - drs.electric) * dmgAnimationScalar);
                int mitigatedFrostDamage = Mathf.RoundToInt(frostDmg * (1f - drs.frost) * dmgAnimationScalar);
                int mitigatedDarkDamage = Mathf.RoundToInt(darkDmg * (1f - drs.dark) * dmgAnimationScalar);
+
+               
+
                //Addd them AAAALLLL up...
                int totalDmg = mitigatedCrushingDmg
                   + mitigatedDarkDamage
@@ -75,9 +99,10 @@ public class AttackBehavior : MonoBehaviour
                   + mitigatedMysticalDmg
                   + mitigatedPiercingDmg
                   + mitigatedSlashingDmg;
+
                //Deal the hit.
                stats.charMetrics.currentHealth -= totalDmg;
-               int adjustedStagger = Mathf.RoundToInt(staggerStrength * dmgAnimationScalar);
+               int adjustedStagger = Mathf.RoundToInt(staggerStrength * dmgAnimationScalar * footingMultiplier);
                stats.DrainFooting(adjustedStagger, collision.transform.position - gameObject.transform.position);
 
                //Add the target to the hitTargets so that it doesn't become a victim of chain hits.
