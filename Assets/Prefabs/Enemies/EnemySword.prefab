@@ -183,8 +183,8 @@ GameObject:
   - component: {fileID: 2756618342194465203}
   - component: {fileID: 1494205538}
   - component: {fileID: 1494205532}
-  - component: {fileID: 1494205539}
   - component: {fileID: 1494205540}
+  - component: {fileID: 1494205539}
   m_Layer: 0
   m_Name: EnemySword
   m_TagString: Enemy
@@ -329,13 +329,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f5753f6d2f8e64295c6253902a3108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxJumpHeight: 3
+  minJumpHeight: 0.5
+  timeToJumpApex: 0.35
+  moveSpeed: 3
+  terminalVelocity: 0
+  velocity: {x: 0, y: 0, z: 0}
+  directionalInput: {x: 0, y: 0}
+  attackBox: {fileID: 2756618341423167754}
+  bodySprite: {fileID: 2756618341631061881}
+  currentAction: 
+--- !u!114 &1494205540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756618342194465215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac8b6e20e7e41854587b7953f7751c4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSightDistance: 8
+  alerted: 0
+  spriteFacingSource: {fileID: 2756618341631061881}
+--- !u!114 &1494205539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756618342194465215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc3eaba8e7e796c4e86505237b11e019, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   charMetrics:
-    health: 212
-    stamina: 45
+    health: 6666
+    stamina: 42
     equipLoad: 0
     weight: 0
-    footing: 1
-    balance: 1
+    footing: 0
+    balance: 0
     damageResistances:
       crushing: 0
       slashing: 0
@@ -356,41 +393,3 @@ MonoBehaviour:
       banish: 0
   staminaRegenPerSec: 34
   footingRegenPerSec: 10
-  attackBox: {fileID: 2756618341423167754}
-  bodySprite: {fileID: 2756618341631061881}
---- !u!114 &1494205539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2756618342194465215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7501867f7f7e77244962eace3d6fe52d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxJumpHeight: 3
-  minJumpHeight: 0.5
-  timeToJumpApex: 0.35
-  moveSpeed: 6
-  terminalVelocity: 0
-  velocity: {x: 0, y: 0, z: 0}
-  directionalInput: {x: 0, y: 0}
-  timeToStop1Unit: 3
-  timeToStop1UnitAir: 12
---- !u!114 &1494205540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2756618342194465215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac8b6e20e7e41854587b7953f7751c4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSightDistance: 8
-  alerted: 0
-  spriteFacingSource: {fileID: 2756618341631061881}

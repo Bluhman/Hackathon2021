@@ -496,10 +496,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1494205532, guid: c335ef206c324c94ab3373e30fcf001b, type: 3}
-      propertyPath: charMetrics.health
-      value: 5000
-      objectReference: {fileID: 0}
     - target: {fileID: 2756618342194465200, guid: c335ef206c324c94ab3373e30fcf001b, type: 3}
       propertyPath: m_RootOrder
       value: 1
