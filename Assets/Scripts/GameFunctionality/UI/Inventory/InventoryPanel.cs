@@ -17,12 +17,7 @@ public class InventoryPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //this needs to go at some point
-        playerInventory.value = new List<Item>();
-        foreach (var i in weaponDatabase.value)
-        {
-            playerInventory.value.Add(i);
-        }
+
     }
 
     private void OnEnable()
@@ -64,7 +59,7 @@ public class InventoryPanel : MonoBehaviour
                 for (int i = 0; i < items.Count; i++)
                 {
                     var item = Instantiate(inventoryItemPrefab, this.transform);
-                    item.transform.Find("ButtonManager").gameObject.GetComponent<InventoryItem>().SetUpItem(items[i]);
+                    item.gameObject.GetComponent<InventoryItem>().SetUpItem(items[i]);
                     renderedInventoryItems.Add(item);
                 }
 

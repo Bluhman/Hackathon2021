@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
     public IntReference playerHp;
-    public int gameOverFramesDelay = 60;
+    public int gameOverFramesDelay = 240;
+    public int restartSceneDelay = 1200;
 
     GameObject showHide;
     int currentFrameDelay = 0;
@@ -28,6 +30,11 @@ public class GameOver : MonoBehaviour
             }
 
             currentFrameDelay++;
+
+            if (currentFrameDelay > restartSceneDelay)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
         else
         {
