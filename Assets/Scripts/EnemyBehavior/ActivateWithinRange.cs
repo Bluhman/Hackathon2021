@@ -71,7 +71,7 @@ public class ActivateWithinRange : MonoBehaviour
 	private void LateUpdate()
 	{
 
-		if (activationDistance.Contains(gameCamera.transform.position + new Vector3(0, 0, gameCameraLogic.camDistance)))
+		if (!targetScript.enabled && activationDistance.Contains(gameCamera.transform.position + new Vector3(0, 0, gameCameraLogic.camDistance)))
 		{
 			targetScript.enabled = true;
 			//Activate all children:

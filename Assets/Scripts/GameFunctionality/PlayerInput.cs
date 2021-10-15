@@ -7,6 +7,7 @@ public class PlayerInput : MonoBehaviour
 {
 	PlayerController player;
 	public PlayerActivationInteractor playerInteract;
+	public BoolReference inventoryOpen;
 	public float doubleTapDashTimingWindow = 0.25f;
 
 	void Start()
@@ -39,7 +40,7 @@ public class PlayerInput : MonoBehaviour
 			player.OnDash(false);
 		}
 
-		if (Input.GetButtonDown("Fire1"))
+		if (Input.GetButtonDown("Fire1") && !inventoryOpen.value)
 		{
 			player.OnAttack();
 		}

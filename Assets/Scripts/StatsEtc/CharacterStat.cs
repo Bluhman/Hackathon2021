@@ -16,7 +16,9 @@ public class CharacterStat : MonoBehaviour
 	protected float staminaRegenMultiplier = 1;
 	float damageMultiplier = 1;
 	float healingMultiplier = 1;
-	DamageResistances temporaryResistances;
+
+	public DamageResistances blockResistances;
+	public float blockFootingScalar = 0.5f;
 
 	BoxCollider2D hitbox;
 
@@ -83,8 +85,14 @@ public class CharacterStat : MonoBehaviour
 		} 
 		else
 		{
+			OnHit();
 			InvokeRepeating("RegenerateFooting", 1f / footingRegenPerSec, 1f / footingRegenPerSec);
 		}
+	}
+
+	protected virtual void OnHit()
+	{
+		
 	}
 
 	protected virtual void OnStagger(int amount, Vector2 direction)
@@ -95,6 +103,8 @@ public class CharacterStat : MonoBehaviour
 		{
 			physicsSim.velocity += (Vector3)direction * Mathf.Abs(charMetrics.currentFooting);
 		}
+
+		//Debug.Log(physicsSim.velocity);
 
 		//Immediately restore all footing.
 		charMetrics.currentFooting = charMetrics.footing;

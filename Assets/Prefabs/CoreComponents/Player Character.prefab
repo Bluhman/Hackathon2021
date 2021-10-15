@@ -291,7 +291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1536
   horizontalRayCount: 4
   verticalRayCount: 4
   horizontalRaySpacing: 0
@@ -343,6 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInteract: {fileID: 1178744244}
+  inventoryOpen: {fileID: 11400000, guid: 75dc23d1908b9b047867313fececfb0b, type: 2}
   doubleTapDashTimingWindow: 0.25
 --- !u!50 &5086157756408759466
 Rigidbody2D:
@@ -404,6 +405,16 @@ MonoBehaviour:
       banish: 0
   staminaRegenPerSec: 47
   footingRegenPerSec: 10
+  blockResistances:
+    crushing: 0
+    slashing: 0
+    piercing: 0
+    mystical: 0
+    fire: 0
+    electric: 0
+    frost: 0
+    dark: 0
+  blockFootingScalar: 0.5
   level0Metrics:
     health: 420
     stamina: 80
