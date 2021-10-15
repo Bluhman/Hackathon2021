@@ -15,11 +15,12 @@ public class CanidSwordEnemyController : WalkingController
 	public string currentAction;
 
 	float swordMirrorDistance;
+	float xMovementSmoothing;
 	bool alerted;
 	float actionTimer = 0;
 
 	// Start is called before the first frame update
-	void Start()
+	public override void Start()
 	{
 		base.Start();
 
@@ -32,7 +33,7 @@ public class CanidSwordEnemyController : WalkingController
 	}
 
 	// Update is called once per frame
-	void Update()
+	protected override void Update()
 	{
 		base.Update();
 
@@ -43,7 +44,10 @@ public class CanidSwordEnemyController : WalkingController
 		{
 			DoAI();
 		}
-
+		else
+		{
+			actionTimer = 0;
+		}
 	}
 
 	private void DoAI()
@@ -52,9 +56,11 @@ public class CanidSwordEnemyController : WalkingController
 		if (getIsAirborne()
 			|| (getLeftLedge() && currentAction == "WalkLeft" && !getIsAirborne())
 			|| (getRightLedge() && currentAction == "WalkRight" && !getIsAirborne())
+			|| (currentAction == "WalkLeft" && controller.collisions.left)
+			|| (currentAction == "WalkRight" && controller.collisions.right)
 			)
 		{
-			Debug.Log("RECALC!" + getIsAirborne() + (getLeftLedge() && currentAction == "WalkLeft") + (getRightLedge() && currentAction == "WalkRight"));
+			//Debug.Log("RECALC!" + getIsAirborne() + (getLeftLedge() && currentAction == "WalkLeft") + (getRightLedge() && currentAction == "WalkRight"));
 			actionTimer = 0;
 		}
 
@@ -62,15 +68,15 @@ public class CanidSwordEnemyController : WalkingController
 
 		if (actionTimer <= 0)
 		{
-			List<string> actionTags = new List<string> { 
+			List<string> actionTags = new List<string> {
 				"DoIdle"
 			};
-			if (!getLeftLedge())
+			if (!getLeftLedge() && !controller.collisions.left)
 			{
 				actionTags.Add("WalkLeft");
 				actionTags.Add("WalkLeft");
 			}
-			if (!getRightLedge())
+			if (!getRightLedge() && !controller.collisions.right)
 			{
 				actionTags.Add("WalkRight");
 				actionTags.Add("WalkRight");
@@ -78,7 +84,7 @@ public class CanidSwordEnemyController : WalkingController
 			string choice = actionTags[UnityEngine.Random.Range(0, actionTags.Count)];
 			Invoke(choice, 0);
 			currentAction = choice;
-			Debug.Log("Decision: " + currentAction);
+			//Debug.Log("Decision: " + currentAction);
 		}
 
 
@@ -127,10 +133,11 @@ public class CanidSwordEnemyController : WalkingController
 		{
 			//Debug.Log(wc.directionalInput.x);
 			bodySprite.flipX = directionalInput.x > 0;
-			var modifiedDistance = attackBox.transform.localPosition;
-			modifiedDistance.x = swordMirrorDistance * -Mathf.Sign(directionalInput.x);
-			attackBox.transform.localPosition = modifiedDistance;
 		}
+
+		var modifiedDistance = attackBox.transform.localPosition;
+		modifiedDistance.x = swordMirrorDistance * (bodySprite.flipX ? -1 : 1);
+		attackBox.transform.localPosition = modifiedDistance;
 	}
 
 	public bool CannotFlip
@@ -150,24 +157,21 @@ animator.GetCurrentAnimatorStateInfo(0).IsTag("atk")
 
 	public override void CalculateVelocity()
 	{
+		base.CalculateVelocity();
 		float targetVelocityX;
 		if (animator.GetCurrentAnimatorStateInfo(0).IsName("Stagger"))
 		{
-			//Moderate friction... None in air.
 			targetVelocityX = velocity.x / (getIsAirborne() ? 1 : 2);
 		}
-		//Can't move voluntarily in these states:
-		else if (CannotMove)
-		{
-			targetVelocityX = 0;
-		}
-		else
+		else if (!CannotMove)
 		{
 			targetVelocityX = directionalInput.x * moveSpeed;
 		}
+		else
+		{
+			targetVelocityX = 0;
+		}
+		velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref xMovementSmoothing, 0.1f);
 
-		velocity.x = targetVelocityX;
-
-		base.CalculateVelocity();
 	}
 }

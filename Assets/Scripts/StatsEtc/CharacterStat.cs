@@ -96,6 +96,8 @@ public class CharacterStat : MonoBehaviour
 			physicsSim.velocity += (Vector3)direction * Mathf.Abs(charMetrics.currentFooting);
 		}
 
+		//Debug.Log(physicsSim.velocity);
+
 		//Immediately restore all footing.
 		charMetrics.currentFooting = charMetrics.footing;
 
