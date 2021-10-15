@@ -17,6 +17,7 @@ public class CanidSwordEnemyController : WalkingController
 	float swordMirrorDistance;
 	float xMovementSmoothing;
 	bool alerted;
+	bool block;
 	float actionTimer = 0;
 
 	// Start is called before the first frame update
@@ -94,7 +95,7 @@ public class CanidSwordEnemyController : WalkingController
 		}
 		else
 		{
-
+			
 		}
 	}
 
@@ -116,6 +117,13 @@ public class CanidSwordEnemyController : WalkingController
 		actionTimer = UnityEngine.Random.Range(1.0f, 7.5f);
 	}
 
+	private void Block()
+	{
+		//Face towards player and raise shield.
+		ab.FacePlayer();
+		block = true;
+	}
+
 	private void OnEnable()
 	{
 		//When you get enabled, don't have the attack hitbox enabled!
@@ -128,6 +136,13 @@ public class CanidSwordEnemyController : WalkingController
 		animator.SetBool("walking", directionalInput.x != 0);
 		animator.SetFloat("walkingSpeed", Math.Abs(velocity.x));
 		animator.SetBool("inAir", getIsAirborne());
+
+		if (CannotMove)
+		{
+			block = false;
+		}
+
+		animator.SetBool("blocking", block);
 
 		if (directionalInput.x != 0 && !CannotFlip)
 		{

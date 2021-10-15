@@ -29,16 +29,25 @@ public class AwarenessBehavior : MonoBehaviour
 	{
 		if (!alerted)
 		{
-			facingRight = spriteFacingSource.flipX;
-			bool ahead = facingRight == transform.position.x < thePlayer.transform.position.x;
-			if (ahead)
-			{
-				int layerMask = (1 << 9) + (1 << 8);
-				var thingHit = Physics2D.Linecast(transform.position, thePlayer.transform.position, layerMask);
-				alerted = thingHit.transform == thePlayer.transform && thingHit.distance <= maxSightDistance ;
-				//if (alerted) Debug.Log("I SEE YOU.");
-			}
-
+			SearchForPlayer();
 		}
+	}
+
+	private void SearchForPlayer()
+	{
+		facingRight = spriteFacingSource.flipX;
+		bool ahead = facingRight == transform.position.x < thePlayer.transform.position.x;
+		if (ahead)
+		{
+			int layerMask = (1 << 9) + (1 << 8);
+			var thingHit = Physics2D.Linecast(transform.position, thePlayer.transform.position, layerMask);
+			alerted = thingHit.transform == thePlayer.transform && thingHit.distance <= maxSightDistance;
+			//if (alerted) Debug.Log("I SEE YOU.");
+		}
+	}
+
+	public void FacePlayer()
+	{
+		spriteFacingSource.flipX = transform.position.x < thePlayer.transform.position.x;
 	}
 }
