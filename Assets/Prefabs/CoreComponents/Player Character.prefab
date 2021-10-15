@@ -343,6 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInteract: {fileID: 1178744244}
+  inventoryOpen: {fileID: 11400000, guid: 75dc23d1908b9b047867313fececfb0b, type: 2}
   doubleTapDashTimingWindow: 0.25
 --- !u!50 &5086157756408759466
 Rigidbody2D:
