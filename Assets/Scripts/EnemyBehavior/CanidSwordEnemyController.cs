@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(Animator))]
-public class CanidSwordEnemyBehavior : WalkingController
+public class CanidSwordEnemyController : WalkingController
 {
 	Animator animator;
 	CharacterStat cs;
