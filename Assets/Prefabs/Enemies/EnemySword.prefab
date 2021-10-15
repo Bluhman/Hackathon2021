@@ -131,15 +131,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d825699ab064ab4ba69185816999706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crushingDmg: 0
-  slashingDmg: 125
+  crushingDmg: 121
+  slashingDmg: 316
   piercingDmg: 0
   mysticalDmg: 0
   fireDmg: 0
   electricDmg: 0
   frostDmg: 0
   darkDmg: 0
-  staggerStrength: 12
+  staggerStrength: 9
   hittableTargetTags:
   - Player
   repeatHitTime: 0
@@ -401,6 +401,7 @@ MonoBehaviour:
   attackBox: {fileID: 2756618341423167754}
   bodySprite: {fileID: 2756618341631061881}
   currentAction: 
+  attackRange: 0.98
 --- !u!114 &1494205540
 MonoBehaviour:
   m_ObjectHideFlags: 0
