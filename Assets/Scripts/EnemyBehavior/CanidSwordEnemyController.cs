@@ -54,6 +54,12 @@ public class CanidSwordEnemyController : WalkingController
 	{
 		base.Update();
 
+		if (!alerted)
+		{
+			blocking = false;
+		}
+
+		//If just recently alerted to the existence of the player, take action immediately!
 		if (!alerted && ab.alerted)
 		{
 			actionTimer = 0;
