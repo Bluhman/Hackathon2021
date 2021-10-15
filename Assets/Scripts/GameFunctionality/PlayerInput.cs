@@ -40,7 +40,6 @@ public class PlayerInput : MonoBehaviour
 			player.OnDash(false);
 		}
 
-		Debug.Log(inventoryOpen);
 		if (Input.GetButtonDown("Fire1") && !inventoryOpen.value)
 		{
 			player.OnAttack();

@@ -64,9 +64,10 @@ public class AttackBehavior : MonoBehaviour
                var anim = collision.gameObject.GetComponent<Animator>();
                if (anim != null
                   && anim.GetCurrentAnimatorStateInfo(0).IsTag("block")
-                  && anim.GetBool("facingRight") == transform.position.x < collision.transform.position.x
+                  && anim.GetBool("facingRight") == transform.position.x > collision.transform.position.x
                   )
                {
+                  //Debug.Break();
                   drs.crushing += blockMetrics.crushing;
                   drs.slashing += blockMetrics.slashing;
                   drs.piercing += blockMetrics.piercing;
@@ -75,7 +76,7 @@ public class AttackBehavior : MonoBehaviour
                   drs.frost += blockMetrics.frost;
                   drs.electric += blockMetrics.electric;
                   drs.dark += blockMetrics.dark;
-                  footingMultiplier *= stats.blockFootingScalar;
+                  footingMultiplier = stats.blockFootingScalar;
                }
 
                //Calculate damage output in response to the defenses and status on the target.

@@ -9,7 +9,6 @@ public class CanidSwordEnemyController : WalkingController
 {
 	Animator animator;
 	CharacterStat baseCharacterStats;
-	BaseMetrics baseCharacterMetrics;
 	AwarenessBehavior ab;
 	public GameObject attackBox;
 	public SpriteRenderer bodySprite;
@@ -45,7 +44,6 @@ public class CanidSwordEnemyController : WalkingController
 		animator = GetComponent<Animator>();
 		baseCharacterStats = GetComponent<CharacterStat>();
 		ab = GetComponent<AwarenessBehavior>();
-		baseCharacterMetrics = baseCharacterStats.charMetrics;
 
 		swordMirrorDistance = attackBox.transform.localPosition.x;
 	}
@@ -54,6 +52,11 @@ public class CanidSwordEnemyController : WalkingController
 	protected override void Update()
 	{
 		base.Update();
+
+		if (!alerted && ab.alerted)
+		{
+			actionTimer = 0;
+		}
 
 		alerted = ab.alerted;
 		DetermineState();
@@ -83,6 +86,11 @@ public class CanidSwordEnemyController : WalkingController
 		}
 
 		actionTimer -= Time.deltaTime;
+		if (alerted)
+		{
+			//choose actions twice as fast while alerted.
+			actionTimer -= Time.deltaTime;
+		}
 
 		if (actionTimer <= 0)
 		{
@@ -99,21 +107,53 @@ public class CanidSwordEnemyController : WalkingController
 				actionTags.Add("WalkRight");
 				actionTags.Add("WalkRight");
 			}
+			if (alerted)
+			{
+				//Battle options:
+				actionTags.Add("Block");
+				if (!blocking)
+				{
+					actionTags.Add("Block");
+					actionTags.Add("Block");
+					actionTags.Add("Block");
+					actionTags.Add("Block");
+				}
+				else if (ab.playerToRight && bodySprite.flipX)
+				{
+					actionTags.Add("WalkRight");
+				}
+				else if (!ab.playerToRight && !bodySprite.flipX)
+				{
+					actionTags.Add("WalkLeft");
+				}
+			}
 			string choice = actionTags[UnityEngine.Random.Range(0, actionTags.Count)];
+
+			//Outside of normal probability cycles:
+			if (alerted)
+			{
+				if (ab.playerToRight != bodySprite.flipX)
+				{
+					//We're not facing the player!!
+					if (UnityEngine.Random.value > 0.95f)
+					{
+						choice = "Block";
+					}
+				}
+				else if (ab.playerDistance < 1)
+				{
+					if (UnityEngine.Random.value > 0.75f)
+					{
+						choice = "Attack";
+					}
+				}
+			}
+
 			Invoke(choice, 0);
 			currentAction = choice;
 			//Debug.Log("Decision: " + currentAction);
 		}
 
-
-		if (alerted)
-		{
-			//Angry
-		}
-		else
-		{
-			
-		}
 	}
 
 	private void DoIdle()
@@ -139,6 +179,13 @@ public class CanidSwordEnemyController : WalkingController
 		//Face towards player and raise shield.
 		ab.FacePlayer();
 		blocking = true;
+		actionTimer = UnityEngine.Random.Range(1.0f, 1.4f);
+	}
+
+	private void Attack()
+	{
+		ab.FacePlayer();
+		animator.SetTrigger("attack");
 	}
 
 	private void OnEnable()

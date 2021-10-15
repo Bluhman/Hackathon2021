@@ -1189,6 +1189,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6794094869180728183, guid: fbd81019fbe4e64468ebb5f3c19556eb, type: 3}
+      propertyPath: collisionMask.m_Bits
+      value: 1536
+      objectReference: {fileID: 0}
     - target: {fileID: 6794094869180728185, guid: fbd81019fbe4e64468ebb5f3c19556eb, type: 3}
       propertyPath: m_Name
       value: Player Character
@@ -1226,6 +1230,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3382206524616287517}
     m_Modifications:
+    - target: {fileID: 189534673705836921, guid: e07f4134a4f023a428f7fc407fbd3c05, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 189534674320722419, guid: e07f4134a4f023a428f7fc407fbd3c05, type: 3}
       propertyPath: m_Name
       value: GameOverCanvas

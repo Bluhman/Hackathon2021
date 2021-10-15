@@ -674,6 +674,16 @@ MonoBehaviour:
       banish: 0
   staminaRegenPerSec: 34
   footingRegenPerSec: 10
+  blockResistances:
+    crushing: 0
+    slashing: 0
+    piercing: 0
+    mystical: 0
+    fire: 0
+    electric: 0
+    frost: 0
+    dark: 0
+  blockFootingScalar: 0.5
 --- !u!114 &541165872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1915,10 +1925,6 @@ PrefabInstance:
     - target: {fileID: 5363533930503727305, guid: 9deed252cae4270419c6840e20f36989, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6414028115599204913, guid: 9deed252cae4270419c6840e20f36989, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6762372697651122008, guid: 9deed252cae4270419c6840e20f36989, type: 3}
       propertyPath: m_AnchorMax.x

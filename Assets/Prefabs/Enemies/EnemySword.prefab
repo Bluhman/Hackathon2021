@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1067916302}
   - component: {fileID: 1067916303}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Impassability
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067916301}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.31, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2756618342194465200}
@@ -56,11 +56,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.25, y: 0}
-      - {x: 0, y: 0.98}
-      - {x: -0.25, y: 0}
-      - {x: -0.25, y: -0.7}
-      - {x: 0.25, y: -0.7}
+    - - {x: 0.12, y: 0}
+      - {x: 0, y: 0.47}
+      - {x: -0.12, y: 0}
+      - {x: -0.12, y: -0.4}
+      - {x: 0.12, y: -0.4}
 --- !u!1 &2756618341423167754
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +433,7 @@ MonoBehaviour:
     stamina: 47
     equipLoad: 0
     weight: 0
-    footing: 6
+    footing: 2
     balance: 5
     damageResistances:
       crushing: 0
@@ -455,4 +455,14 @@ MonoBehaviour:
       banish: 0
   staminaRegenPerSec: 34
   footingRegenPerSec: 10
-  bodySprite: {fileID: 2756618341631061881}
+  blockResistances:
+    crushing: 75
+    slashing: 90
+    piercing: 66
+    mystical: 50
+    fire: 0
+    electric: 0
+    frost: 0
+    dark: 0
+  blockFootingScalar: 0.1
+  bodySpriteObject: {fileID: 2756618341631061863}

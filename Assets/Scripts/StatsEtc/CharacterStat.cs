@@ -85,8 +85,14 @@ public class CharacterStat : MonoBehaviour
 		} 
 		else
 		{
+			OnHit();
 			InvokeRepeating("RegenerateFooting", 1f / footingRegenPerSec, 1f / footingRegenPerSec);
 		}
+	}
+
+	protected virtual void OnHit()
+	{
+		
 	}
 
 	protected virtual void OnStagger(int amount, Vector2 direction)

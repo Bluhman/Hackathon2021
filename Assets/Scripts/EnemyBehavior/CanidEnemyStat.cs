@@ -8,7 +8,9 @@ public class CanidEnemyStat : CharacterStat
 {
    Animator animator;
    WalkingController wc;
-   public SpriteRenderer bodySprite;
+   public GameObject bodySpriteObject;
+   Vector2 initialSpriteLocalPos;
+   SpriteRenderer bodySprite;
 
    void Start()
    {
@@ -16,8 +18,33 @@ public class CanidEnemyStat : CharacterStat
 
       animator = GetComponent<Animator>();
       wc = GetComponent<WalkingController>();
+      bodySprite = bodySpriteObject.GetComponent<SpriteRenderer>();
+      initialSpriteLocalPos = bodySpriteObject.transform.localPosition;
       Debug.Log(wc);
    }
+
+	protected override void OnHit()
+	{
+      //CancelInvoke();
+      InvokeRepeating("randomShakePerFrame", 0, Time.deltaTime);
+      Invoke("randomShakeStop", 0.3f);
+	}
+
+   void randomShakePerFrame()
+	{
+      var randomizedLocalPos = initialSpriteLocalPos;
+      randomizedLocalPos.x += Random.Range(-0.05f, 0.05f);
+      randomizedLocalPos.y += Random.Range(-0.05f, 0.05f);
+      bodySpriteObject.transform.localPosition = randomizedLocalPos;
+      Debug.Log(bodySpriteObject.transform.localPosition);
+	}
+
+   void randomShakeStop()
+	{
+      bodySpriteObject.transform.localPosition = initialSpriteLocalPos;
+      CancelInvoke();
+   }
+
 	protected override void OnStagger(int amount, Vector2 direction)
 	{
       if (amount <= 0)

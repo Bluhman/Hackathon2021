@@ -33,21 +33,32 @@ public class AwarenessBehavior : MonoBehaviour
 		}
 	}
 
+	public float playerDistance
+	{
+		get => (transform.position - thePlayer.transform.position).magnitude;
+	}
+
+	public bool playerToRight
+	{
+		get => transform.position.x < thePlayer.transform.position.x;
+	}
+
 	private void SearchForPlayer()
 	{
 		facingRight = spriteFacingSource.flipX;
-		bool ahead = facingRight == transform.position.x < thePlayer.transform.position.x;
+		bool ahead = facingRight == playerToRight;
 		if (ahead)
 		{
 			int layerMask = (1 << 9) + (1 << 8);
 			var thingHit = Physics2D.Linecast(transform.position, thePlayer.transform.position, layerMask);
-			alerted = thingHit.transform == thePlayer.transform && thingHit.distance <= maxSightDistance;
-			//if (alerted) Debug.Log("I SEE YOU.");
+			alerted = thingHit.transform == thePlayer.transform 
+				&& thingHit.distance <= maxSightDistance;
+			if (alerted) Debug.Log("I SEE YOU.");
 		}
 	}
 
 	public void FacePlayer()
 	{
-		spriteFacingSource.flipX = transform.position.x < thePlayer.transform.position.x;
+		spriteFacingSource.flipX = playerToRight;
 	}
 }
