@@ -1234,6 +1234,42 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 189534673705836922, guid: e07f4134a4f023a428f7fc407fbd3c05, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 189534673705836922, guid: e07f4134a4f023a428f7fc407fbd3c05, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 189534673705836922, guid: e07f4134a4f023a428f7fc407fbd3c05, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 189534673705836922, guid: e07f4134a4f023a428f7fc407fbd3c05, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 189534674242529280, guid: e07f4134a4f023a428f7fc407fbd3c05, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 189534674242529280, guid: e07f4134a4f023a428f7fc407fbd3c05, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 189534674242529280, guid: e07f4134a4f023a428f7fc407fbd3c05, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 189534674242529280, guid: e07f4134a4f023a428f7fc407fbd3c05, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 189534674242529281, guid: e07f4134a4f023a428f7fc407fbd3c05, type: 3}
+      propertyPath: m_Color.a
+      value: 0.4745098
+      objectReference: {fileID: 0}
     - target: {fileID: 189534674320722419, guid: e07f4134a4f023a428f7fc407fbd3c05, type: 3}
       propertyPath: m_Name
       value: GameOverCanvas

@@ -13,6 +13,7 @@ public class CanidSwordEnemyController : WalkingController
 	public GameObject attackBox;
 	public SpriteRenderer bodySprite;
 	public string currentAction;
+	public float attackRange;
 
 	float swordMirrorDistance;
 	float xMovementSmoothing;
@@ -60,8 +61,9 @@ public class CanidSwordEnemyController : WalkingController
 
 		alerted = ab.alerted;
 		DetermineState();
+		var currentAnimInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-		if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("uncn"))
+		if (!currentAnimInfo.IsTag("uncn") && !currentAnimInfo.IsTag("atk"))
 		{
 			DoAI();
 		}
@@ -90,6 +92,16 @@ public class CanidSwordEnemyController : WalkingController
 		{
 			//choose actions twice as fast while alerted.
 			actionTimer -= Time.deltaTime;
+		}
+
+		if (alerted && ab.playerDistance < attackRange)
+		{
+			if (UnityEngine.Random.value < 0.8f)
+			{
+				Invoke("Attack", 0);
+				currentAction = "Attack";
+				return;
+			}
 		}
 
 		if (actionTimer <= 0)
@@ -135,16 +147,9 @@ public class CanidSwordEnemyController : WalkingController
 				if (ab.playerToRight != bodySprite.flipX)
 				{
 					//We're not facing the player!!
-					if (UnityEngine.Random.value > 0.95f)
+					if (UnityEngine.Random.value < 0.95f)
 					{
 						choice = "Block";
-					}
-				}
-				else if (ab.playerDistance < 1)
-				{
-					if (UnityEngine.Random.value > 0.75f)
-					{
-						choice = "Attack";
 					}
 				}
 			}
@@ -177,6 +182,7 @@ public class CanidSwordEnemyController : WalkingController
 	private void Block()
 	{
 		//Face towards player and raise shield.
+		directionalInput.x = 0;
 		ab.FacePlayer();
 		blocking = true;
 		actionTimer = UnityEngine.Random.Range(1.0f, 1.4f);

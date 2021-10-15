@@ -12,11 +12,13 @@ public class AwarenessBehavior : MonoBehaviour
 
 	public SpriteRenderer spriteFacingSource;
 	GameObject thePlayer;
+	Animator playerAnimationState;
 
 	// Start is called before the first frame update
 	void Start()
 	{
 		thePlayer = GameObject.FindWithTag("Player");
+		playerAnimationState = thePlayer.GetComponent<Animator>();
 	}
 
 	private void OnEnable()
@@ -27,15 +29,26 @@ public class AwarenessBehavior : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (!alerted)
+		if (!alerted && !playerAnimationState.GetBool("isDead"))
 		{
 			SearchForPlayer();
+		}
+
+		if (playerAnimationState.GetBool("isDead"))
+		{
+			alerted = false;
 		}
 	}
 
 	public float playerDistance
 	{
-		get => (transform.position - thePlayer.transform.position).magnitude;
+		get { 
+			if (playerAnimationState.GetBool("isDead"))
+			{
+				return 9999;
+			}
+			return (transform.position - thePlayer.transform.position).magnitude; 
+		}
 	}
 
 	public bool playerToRight
