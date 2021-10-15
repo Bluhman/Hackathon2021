@@ -147,6 +147,29 @@ public class PlayerStatTracker : CharacterStat
       base.OnStagger(amount, direction);
    }
 
+	protected override void OnHit()
+	{
+      pc.bodySprite.color = new Color(255, 0, 0);
+      //CancelInvoke();
+      InvokeRepeating("fadeBodyBack", 0, 0.01f);
+	}
+
+   private void fadeBodyBack()
+	{
+      if (pc.bodySprite.color == pc.skinColor)
+		{
+         CancelInvoke();
+		}
+      //There's no lerp for this so uh...
+      //transform the color into a vector 3.
+      Vector3 currentColor = new Vector3(pc.bodySprite.color.r, pc.bodySprite.color.g, pc.bodySprite.color.b);
+      Vector3 targetColor = new Vector3(pc.skinColor.r, pc.skinColor.g, pc.skinColor.b);
+      Vector3 nextColor = Vector3.Lerp(currentColor, targetColor, 0.33f);
+      Debug.Log(nextColor);
+      //Set the actual damn color
+      pc.bodySprite.color = new Color(nextColor.x, nextColor.y, nextColor.z);
+   }
+
 	int scaleStat(AnimationCurve curve, int statLevel, string statTarget)
 	{
       //Start from the level 0 baseline.

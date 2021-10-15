@@ -32,6 +32,8 @@ public class PlayerController : WalkingController
 
 	public GameObject activatorObject;
 	public SpriteRenderer bodySprite;
+	[HideInInspector]
+	public Color skinColor;
 	public SpriteRenderer clothingSprite;
 
 	// Start is called before the first frame update
@@ -42,6 +44,8 @@ public class PlayerController : WalkingController
 		stats = GetComponent<PlayerStatTracker>();
 		equipmentState = GetComponent<Inventory>();
 		animator = GetComponent<Animator>();
+
+		skinColor = bodySprite.color;
 
 		//Initialize jumps left to 0, in case player is spawning in midair.
 		jumpsLeft = 0;

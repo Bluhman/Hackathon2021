@@ -85,9 +85,9 @@ public class CharacterStat : MonoBehaviour
 		} 
 		else
 		{
-			OnHit();
 			InvokeRepeating("RegenerateFooting", 1f / footingRegenPerSec, 1f / footingRegenPerSec);
 		}
+		OnHit();
 	}
 
 	protected virtual void OnHit()
