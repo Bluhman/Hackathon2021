@@ -1168,6 +1168,7 @@ MonoBehaviour:
   timeToJumpApex: 0.35
   moveSpeed: 6
   terminalVelocity: 0
+  landingSound: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   directionalInput: {x: 0, y: 0}
   timeToStop1Unit: 3
@@ -3378,7 +3379,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameSuite
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6391465316627943002, guid: 9deed252cae4270419c6840e20f36989, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9deed252cae4270419c6840e20f36989, type: 3}
 --- !u!1001 &8510552092045653033
 PrefabInstance:
