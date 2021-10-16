@@ -7,6 +7,8 @@ using UnityEngine;
 public class ActivationBehavior : MonoBehaviour
 {
 	Animator animator;
+	public AudioSource soundOnActivation;
+	public GameObject[] thingsToActivate;
 
 	[HideInInspector]
 	public bool usable;
@@ -34,11 +36,22 @@ public class ActivationBehavior : MonoBehaviour
 	{
 		if (!usable) return;
 		alterOnState(!isOn);
+		if (soundOnActivation != null)
+		{
+			soundOnActivation.Play();
+		}
 		usable = false;
 		if (cooldownDuration > 0)
 		{
 			Invoke("BecomeUsable", cooldownDuration);
 		}
+
+		foreach(GameObject obj in thingsToActivate)
+		{
+			obj.SetActive(true);
+		}
+		//Empty out this array after used.
+		thingsToActivate = new GameObject[] { };
 
 	}
 

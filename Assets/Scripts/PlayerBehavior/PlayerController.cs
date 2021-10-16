@@ -32,7 +32,11 @@ public class PlayerController : WalkingController
 
 	public GameObject activatorObject;
 	public SpriteRenderer bodySprite;
+	[HideInInspector]
+	public Color skinColor;
 	public SpriteRenderer clothingSprite;
+
+	public AudioSource jumpSound;
 
 	// Start is called before the first frame update
 	public override void Start()
@@ -42,6 +46,8 @@ public class PlayerController : WalkingController
 		stats = GetComponent<PlayerStatTracker>();
 		equipmentState = GetComponent<Inventory>();
 		animator = GetComponent<Animator>();
+
+		skinColor = bodySprite.color;
 
 		//Initialize jumps left to 0, in case player is spawning in midair.
 		jumpsLeft = 0;
@@ -58,6 +64,8 @@ public class PlayerController : WalkingController
 		{
 			activatorObject.SetActive(!CannotInteract);
 		}
+
+		var lastAirborne = getIsAirborne();
 
 		DeterminePlayerState();
 		CalculateVelocity();
@@ -77,6 +85,14 @@ public class PlayerController : WalkingController
 			else
 			{
 				velocity.y = 0;
+			}
+		}
+
+		if (landingSound != null)
+		{
+			if (lastAirborne && !getIsAirborne())
+			{
+				landingSound.Play();
 			}
 		}
 	}
@@ -239,9 +255,13 @@ public class PlayerController : WalkingController
 			didJump = true;
 		}
 
-		if (_dashing && didJump)
+		if (didJump)
 		{
-			velocity.x *= dashSpeedMultiplier;
+			jumpSound.Play();
+			if (_dashing)
+			{
+				velocity.x *= dashSpeedMultiplier;
+			}
 		}
 	}
 

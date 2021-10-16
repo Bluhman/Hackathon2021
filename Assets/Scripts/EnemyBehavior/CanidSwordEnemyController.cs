@@ -19,6 +19,8 @@ public class CanidSwordEnemyController : WalkingController
 	float xMovementSmoothing;
 	bool alerted;
 	bool _block;
+	int originalStaminaRegen;
+
 	float actionTimer = 0;
 
 	bool blocking
@@ -28,11 +30,13 @@ public class CanidSwordEnemyController : WalkingController
 			_block = value;
 			if (_block)
 			{
-
+				//Regen Stamina very slowly.
+				baseCharacterStats.staminaRegenPerSec = 1;
 			}
 			else
 			{
-
+				//Do regen stamina
+				baseCharacterStats.staminaRegenPerSec = originalStaminaRegen;
 			}
 		}
 	}
@@ -47,6 +51,7 @@ public class CanidSwordEnemyController : WalkingController
 		ab = GetComponent<AwarenessBehavior>();
 
 		swordMirrorDistance = attackBox.transform.localPosition.x;
+		originalStaminaRegen = baseCharacterStats.staminaRegenPerSec;
 	}
 
 	// Update is called once per frame
@@ -129,7 +134,7 @@ public class CanidSwordEnemyController : WalkingController
 			{
 				//Battle options:
 				actionTags.Add("Block");
-				if (!blocking)
+				if (!blocking && baseCharacterStats.charMetrics.stamina > 5)
 				{
 					actionTags.Add("Block");
 					actionTags.Add("Block");
@@ -196,6 +201,7 @@ public class CanidSwordEnemyController : WalkingController
 
 	private void Attack()
 	{
+		blocking = false;
 		ab.FacePlayer();
 		animator.SetTrigger("attack");
 	}

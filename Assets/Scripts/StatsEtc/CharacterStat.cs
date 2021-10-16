@@ -20,6 +20,9 @@ public class CharacterStat : MonoBehaviour
 	public DamageResistances blockResistances;
 	public float blockFootingScalar = 0.5f;
 
+	public GameObject hitEffect;
+	public GameObject blockEffect;
+
 	BoxCollider2D hitbox;
 
 	// Start is called before the first frame update
@@ -38,18 +41,18 @@ public class CharacterStat : MonoBehaviour
 		var load = charMetrics.percentLoaded;
 		if (load < 0.3f)
 		{
-			Debug.Log("Light");
+			//Debug.Log("Light");
 		}
 		else if (load < 0.7f)
 		{
-			Debug.Log("Unencumbered");
+			//Debug.Log("Unencumbered");
 		}
 		else if (load <= 1)
 		{
-			Debug.Log("Encumbered");
+			//Debug.Log("Encumbered");
 		} else
 		{
-			Debug.Log("Overloaded");
+			//Debug.Log("Overloaded");
 		}
 	}
 
@@ -60,13 +63,14 @@ public class CharacterStat : MonoBehaviour
 
 	public virtual void DrainStamina(int amount, float pauseBeforeRegen) {
 		charMetrics.currentStamina -= amount;
-		CancelInvoke();
+		CancelInvoke("DrainStaminaOverTime");
+		CancelInvoke("RegenerateStamina");
 		InvokeRepeating("RegenerateStamina", pauseBeforeRegen, 1f / staminaRegenPerSec * staminaRegenMultiplier);
 	}
 
 	public virtual void ConstantStaminaDrain(int amountPerSec)
 	{
-		CancelInvoke();
+		CancelInvoke("RegenerateStamina");
 		InvokeRepeating("DrainStaminaOverTime", 0f, 1f / amountPerSec);
 	}
 
@@ -75,7 +79,7 @@ public class CharacterStat : MonoBehaviour
 		charMetrics.currentStamina -= 1;
 	}
 
-	public virtual void DrainFooting(int amount, Vector2 direction)
+	public virtual void DrainFooting(int amount, Vector2 direction, bool blocked)
 	{
 		charMetrics.currentFooting -= amount;
 
@@ -85,14 +89,25 @@ public class CharacterStat : MonoBehaviour
 		} 
 		else
 		{
-			OnHit();
 			InvokeRepeating("RegenerateFooting", 1f / footingRegenPerSec, 1f / footingRegenPerSec);
 		}
+		OnHit(blocked, direction);
 	}
 
-	protected virtual void OnHit()
+	protected virtual void OnHit(bool blocked, Vector2 dir)
 	{
-		
+		Vector3 adjustedDir = dir;
+		//This moves the effect spawn zone into the foreground.
+		adjustedDir.z = -3;
+
+		if (blocked && blockEffect != null)
+		{
+			Instantiate(blockEffect, transform.position + adjustedDir.normalized, Quaternion.identity);
+		}
+		else if (hitEffect != null)
+		{
+			Instantiate(hitEffect, transform.position + adjustedDir.normalized, Quaternion.identity);
+		}
 	}
 
 	protected virtual void OnStagger(int amount, Vector2 direction)
@@ -131,7 +146,7 @@ public class CharacterStat : MonoBehaviour
 		charMetrics.currentFooting += 1;
 		if (charMetrics.currentFooting == charMetrics.footing)
 		{
-			CancelInvoke("RevenerateFooting");
+			CancelInvoke("RegenerateFooting");
 		}
 	}
 	
