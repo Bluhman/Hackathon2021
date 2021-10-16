@@ -36,6 +36,8 @@ public class PlayerController : WalkingController
 	public Color skinColor;
 	public SpriteRenderer clothingSprite;
 
+	public AudioSource jumpSound;
+
 	// Start is called before the first frame update
 	public override void Start()
 	{
@@ -63,6 +65,8 @@ public class PlayerController : WalkingController
 			activatorObject.SetActive(!CannotInteract);
 		}
 
+		var lastAirborne = getIsAirborne();
+
 		DeterminePlayerState();
 		CalculateVelocity();
 		//fall through if the player is holding down the down axis while airborne.
@@ -81,6 +85,14 @@ public class PlayerController : WalkingController
 			else
 			{
 				velocity.y = 0;
+			}
+		}
+
+		if (landingSound != null)
+		{
+			if (lastAirborne && !getIsAirborne())
+			{
+				landingSound.Play();
 			}
 		}
 	}
@@ -243,9 +255,13 @@ public class PlayerController : WalkingController
 			didJump = true;
 		}
 
-		if (_dashing && didJump)
+		if (didJump)
 		{
-			velocity.x *= dashSpeedMultiplier;
+			jumpSound.Play();
+			if (_dashing)
+			{
+				velocity.x *= dashSpeedMultiplier;
+			}
 		}
 	}
 

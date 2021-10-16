@@ -16,6 +16,8 @@ public class WalkingController : MonoBehaviour
 	protected float minJumpVelocity;
 	protected float maxJumpVelocity;
 
+	public AudioSource landingSound;
+
 	[HideInInspector]
 	public Vector3 velocity;
 	protected Controller2D controller;
@@ -70,6 +72,8 @@ public class WalkingController : MonoBehaviour
 	{
 		CalculateVelocity();
 
+		var lastAirborne = getIsAirborne();
+
 		controller.Move(velocity * Time.deltaTime, directionalInput);
 
 		if (controller.collisions.above || controller.collisions.below)
@@ -81,6 +85,14 @@ public class WalkingController : MonoBehaviour
 			else
 			{
 				velocity.y = 0;
+			}
+		}
+
+		if (landingSound != null)
+		{
+			if (lastAirborne && !getIsAirborne())
+			{
+				landingSound.Play();
 			}
 		}
 	}
