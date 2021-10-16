@@ -10,6 +10,7 @@ public class AwarenessBehavior : MonoBehaviour
 	public bool alerted;
 	bool facingRight;
 
+	public AudioSource alertNoise;
 	public SpriteRenderer spriteFacingSource;
 	GameObject thePlayer;
 	Animator playerAnimationState;
@@ -66,7 +67,10 @@ public class AwarenessBehavior : MonoBehaviour
 			var thingHit = Physics2D.Linecast(transform.position, thePlayer.transform.position, layerMask);
 			alerted = thingHit.transform == thePlayer.transform 
 				&& thingHit.distance <= maxSightDistance;
-			if (alerted) Debug.Log("I SEE YOU.");
+			if (alerted && alertNoise != null)
+			{
+				alertNoise.Play();
+			}
 		}
 	}
 
