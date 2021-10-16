@@ -60,6 +60,7 @@ public class CharacterStat : MonoBehaviour
 
 	public virtual void DrainStamina(int amount, float pauseBeforeRegen) {
 		charMetrics.currentStamina -= amount;
+		CancelInvoke("DrainStaminaOverTime");
 		CancelInvoke("RegenerateStamina");
 		InvokeRepeating("RegenerateStamina", pauseBeforeRegen, 1f / staminaRegenPerSec * staminaRegenMultiplier);
 	}
