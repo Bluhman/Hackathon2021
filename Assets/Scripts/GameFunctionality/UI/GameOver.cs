@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(AudioSource))]
-
 public class GameOver : MonoBehaviour
 {
     public IntReference playerHp;
