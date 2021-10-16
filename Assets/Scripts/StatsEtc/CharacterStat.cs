@@ -38,18 +38,18 @@ public class CharacterStat : MonoBehaviour
 		var load = charMetrics.percentLoaded;
 		if (load < 0.3f)
 		{
-			Debug.Log("Light");
+			//Debug.Log("Light");
 		}
 		else if (load < 0.7f)
 		{
-			Debug.Log("Unencumbered");
+			//Debug.Log("Unencumbered");
 		}
 		else if (load <= 1)
 		{
-			Debug.Log("Encumbered");
+			//Debug.Log("Encumbered");
 		} else
 		{
-			Debug.Log("Overloaded");
+			//Debug.Log("Overloaded");
 		}
 	}
 
@@ -60,13 +60,13 @@ public class CharacterStat : MonoBehaviour
 
 	public virtual void DrainStamina(int amount, float pauseBeforeRegen) {
 		charMetrics.currentStamina -= amount;
-		CancelInvoke();
+		CancelInvoke("RegenerateStamina");
 		InvokeRepeating("RegenerateStamina", pauseBeforeRegen, 1f / staminaRegenPerSec * staminaRegenMultiplier);
 	}
 
 	public virtual void ConstantStaminaDrain(int amountPerSec)
 	{
-		CancelInvoke();
+		CancelInvoke("RegenerateStamina");
 		InvokeRepeating("DrainStaminaOverTime", 0f, 1f / amountPerSec);
 	}
 
@@ -131,7 +131,7 @@ public class CharacterStat : MonoBehaviour
 		charMetrics.currentFooting += 1;
 		if (charMetrics.currentFooting == charMetrics.footing)
 		{
-			CancelInvoke("RevenerateFooting");
+			CancelInvoke("RegenerateFooting");
 		}
 	}
 	

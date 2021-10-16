@@ -30,6 +30,15 @@ public class CanidEnemyStat : CharacterStat
 		Invoke("randomShakeStop", 0.3f);
 	}
 
+	public override void DrainStamina(int amount, float pauseBeforeRegen)
+	{
+		base.DrainStamina(amount, pauseBeforeRegen);
+		if (charMetrics.stamina == 0)
+		{
+			OnStagger(25, Vector2.zero);
+		}
+	}
+
 	void randomShakePerFrame()
 	{
 		var randomizedLocalPos = initialSpriteLocalPos;

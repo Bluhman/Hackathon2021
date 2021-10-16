@@ -6,15 +6,17 @@ using UnityEngine.UI;
 
 public class EnemyHealthBar : MonoBehaviour
 {
-	public Slider HPBarSlider;
+	public GameObject HPBarSliderObj;
+	Slider HPBarSlider;
 	public Text damageText;
 	public CharacterStat targetStats;
 	public float damageTextDuration;
 
 	private void Start()
 	{
+		HPBarSlider = HPBarSliderObj.GetComponent<Slider>();
 		HPBarSlider.maxValue = targetStats.charMetrics.health;
-		HPBarSlider.value = currentHealth;
+		currentHealth = currentHealth;
 
 		damageValue = 0;
 		damageText.enabled = false;
@@ -27,7 +29,7 @@ public class EnemyHealthBar : MonoBehaviour
 		{
 			targetStats.charMetrics.currentHealth = value;
 			//Hide the HP Bar Slider if the target's at full HP.
-			HPBarSlider.enabled = value == targetStats.charMetrics.health;
+			HPBarSliderObj.SetActive(value == targetStats.charMetrics.health);
 		}
 	}
 
@@ -48,12 +50,8 @@ public class EnemyHealthBar : MonoBehaviour
 
 	public void DisplayDamage(int amount)
 	{
-		if (targetStats.charMetrics.isDead)
-		{
-			return;
-		}
-
 		CancelInvoke();
+		HPBarSliderObj.SetActive(true);
 		//Adds the current damage dealt to the previous damage displayed in case it hasn't
 		//gone away yet.
 		damageValue = damageValue += amount;
@@ -64,10 +62,7 @@ public class EnemyHealthBar : MonoBehaviour
 	{
 		damageValue = 0;
 		damageText.enabled = false;
-		
-		if (targetStats.charMetrics.isDead)
-		{
-			HPBarSlider.enabled = false;
-		}
+
+		HPBarSliderObj.SetActive(!targetStats.charMetrics.isDead);
 	}
 }

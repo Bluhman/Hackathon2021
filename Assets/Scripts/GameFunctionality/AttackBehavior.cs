@@ -70,18 +70,26 @@ public class AttackBehavior : MonoBehaviour
 
 	private void dealDamage(Collider2D collision, CharacterStat stats)
 	{
+		//Can't hit dead things:
+		if (stats.charMetrics.isDead)
+		{
+			return;
+		}
+
 		DamageResistances drs = stats.charMetrics.damageResistances.Clone();
 		var blockMetrics = stats.blockResistances;
 		var footingMultiplier = 1.0f;
 		//One caveat... we need to have it so that a block reduces the damage.
 		//To do this, we have to take the animation component of our hit target.
 		var target = collision.gameObject;
+		var hitBlocked = false;
 		var anim = target.GetComponent<Animator>();
 		if (anim != null
 			&& anim.GetCurrentAnimatorStateInfo(0).IsTag("block")
 			&& anim.GetBool("facingRight") == transform.position.x > collision.transform.position.x
 			)
 		{
+			hitBlocked = true;
 			//Debug.Break();
 			drs.crushing += blockMetrics.crushing;
 			drs.slashing += blockMetrics.slashing;
@@ -123,6 +131,12 @@ public class AttackBehavior : MonoBehaviour
 
 		//Add the target to the hitTargets so that it doesn't become a victim of chain hits.
 		hitTargets.Add(target);
+
+		if (hitBlocked)
+		{
+			//Deal the blocked damage as stamina damage.
+			stats.DrainStamina(totalDmg, 1);
+		}
 
 		var healthBarEnemy = target.transform.Find("EnemyHealthBar");
 		if (healthBarEnemy != null)
