@@ -891,7 +891,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2756618342194465215, guid: c335ef206c324c94ab3373e30fcf001b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c335ef206c324c94ab3373e30fcf001b, type: 3}
@@ -1734,7 +1734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d825699ab064ab4ba69185816999706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crushingDmg: 1
+  crushingDmg: 20
   slashingDmg: 0
   piercingDmg: 0
   mysticalDmg: 0
@@ -1745,8 +1745,9 @@ MonoBehaviour:
   staggerStrength: 0
   hittableTargetTags:
   - Player
-  repeatHitTime: 0.1
+  repeatHitTime: 1
   melee: 0
+  repeatHits: 1
   dmgAnimationScalar: 1
   attackLifetime: -1
 --- !u!61 &1042280973
