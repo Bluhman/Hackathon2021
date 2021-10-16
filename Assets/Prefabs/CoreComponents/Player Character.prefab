@@ -1121,6 +1121,8 @@ MonoBehaviour:
     frost: 0
     dark: 0
   blockFootingScalar: 0.5
+  hitEffect: {fileID: 8124962648977330172, guid: c992a59f8c48b974297e604b7e61db9b, type: 3}
+  blockEffect: {fileID: 0}
   level0Metrics:
     health: 420
     stamina: 80

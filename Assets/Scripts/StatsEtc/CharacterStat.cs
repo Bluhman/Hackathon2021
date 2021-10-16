@@ -20,6 +20,9 @@ public class CharacterStat : MonoBehaviour
 	public DamageResistances blockResistances;
 	public float blockFootingScalar = 0.5f;
 
+	public GameObject hitEffect;
+	public GameObject blockEffect;
+
 	BoxCollider2D hitbox;
 
 	// Start is called before the first frame update
@@ -76,7 +79,7 @@ public class CharacterStat : MonoBehaviour
 		charMetrics.currentStamina -= 1;
 	}
 
-	public virtual void DrainFooting(int amount, Vector2 direction)
+	public virtual void DrainFooting(int amount, Vector2 direction, bool blocked)
 	{
 		charMetrics.currentFooting -= amount;
 
@@ -88,12 +91,23 @@ public class CharacterStat : MonoBehaviour
 		{
 			InvokeRepeating("RegenerateFooting", 1f / footingRegenPerSec, 1f / footingRegenPerSec);
 		}
-		OnHit();
+		OnHit(blocked, direction);
 	}
 
-	protected virtual void OnHit()
+	protected virtual void OnHit(bool blocked, Vector2 dir)
 	{
-		
+		Vector3 adjustedDir = dir;
+		//This moves the effect spawn zone into the foreground.
+		adjustedDir.z = -3;
+
+		if (blocked && blockEffect != null)
+		{
+			Instantiate(blockEffect, transform.position + adjustedDir.normalized, Quaternion.identity);
+		}
+		else if (hitEffect != null)
+		{
+			Instantiate(hitEffect, transform.position + adjustedDir.normalized, Quaternion.identity);
+		}
 	}
 
 	protected virtual void OnStagger(int amount, Vector2 direction)

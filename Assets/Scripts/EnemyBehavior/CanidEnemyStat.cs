@@ -23,8 +23,9 @@ public class CanidEnemyStat : CharacterStat
 		Debug.Log(wc);
 	}
 
-	protected override void OnHit()
+	protected override void OnHit(bool blocked, Vector2 dir)
 	{
+		base.OnHit(blocked, dir);
 		//CancelInvoke();
 		InvokeRepeating("randomShakePerFrame", 0, Time.deltaTime);
 		Invoke("randomShakeStop", 0.3f);

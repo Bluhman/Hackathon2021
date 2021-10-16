@@ -147,8 +147,9 @@ public class PlayerStatTracker : CharacterStat
       base.OnStagger(amount, direction);
    }
 
-	protected override void OnHit()
+	protected override void OnHit(bool blocked, Vector2 dir)
 	{
+      base.OnHit(blocked, dir);
       pc.bodySprite.color = new Color(255, 0, 0);
       //CancelInvoke();
       InvokeRepeating("fadeBodyBack", 0, 0.01f);

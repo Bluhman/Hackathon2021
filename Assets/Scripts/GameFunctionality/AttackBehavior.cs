@@ -127,7 +127,7 @@ public class AttackBehavior : MonoBehaviour
 		//Deal the hit.
 		stats.charMetrics.currentHealth -= totalDmg;
 		int adjustedStagger = Mathf.RoundToInt(staggerStrength * dmgAnimationScalar * footingMultiplier);
-		stats.DrainFooting(adjustedStagger, collision.transform.position - gameObject.transform.position);
+		stats.DrainFooting(adjustedStagger, collision.transform.position - gameObject.transform.position, hitBlocked);
 
 		//Add the target to the hitTargets so that it doesn't become a victim of chain hits.
 		hitTargets.Add(target);

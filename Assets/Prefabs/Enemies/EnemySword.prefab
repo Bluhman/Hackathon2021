@@ -740,6 +740,8 @@ MonoBehaviour:
     frost: 0
     dark: 0
   blockFootingScalar: 0.1
+  hitEffect: {fileID: 8124962648977330172, guid: c992a59f8c48b974297e604b7e61db9b, type: 3}
+  blockEffect: {fileID: 6873401575279363690, guid: 3482cab177dcae5489d80c023f2977a9, type: 3}
   bodySpriteObject: {fileID: 2756618341631061863}
 --- !u!1 &7905865829612548545
 GameObject:
