@@ -8,8 +8,10 @@ public class BaseMetrics
 {
 	public int health;
 	public int stamina;
-	int _currentHealth;
-	int _currentStamina;
+	[ReadOnly]
+	public int _currentHealth;
+	[ReadOnly]
+	public int _currentStamina;
 	public int currentHealth
 	{
 		get => _currentHealth;

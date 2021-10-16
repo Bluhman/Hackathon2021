@@ -889,9 +889,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySword
       objectReference: {fileID: 0}
-    - target: {fileID: 2756618342194465215, guid: c335ef206c324c94ab3373e30fcf001b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 6177257654930699522, guid: c335ef206c324c94ab3373e30fcf001b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6177257654930699522, guid: c335ef206c324c94ab3373e30fcf001b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c335ef206c324c94ab3373e30fcf001b, type: 3}
@@ -999,6 +1003,8 @@ MonoBehaviour:
   charMetrics:
     health: 512
     stamina: 0
+    _currentHealth: 0
+    _currentStamina: 0
     equipLoad: 12
     weight: 0
     footing: 0

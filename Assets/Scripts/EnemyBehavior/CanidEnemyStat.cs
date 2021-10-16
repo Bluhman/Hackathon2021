@@ -33,9 +33,9 @@ public class CanidEnemyStat : CharacterStat
 	public override void DrainStamina(int amount, float pauseBeforeRegen)
 	{
 		base.DrainStamina(amount, pauseBeforeRegen);
-		if (charMetrics.stamina == 0)
+		if (charMetrics.currentStamina <= 0)
 		{
-			OnStagger(25, Vector2.zero);
+			OnStagger(10, Vector2.zero);
 		}
 	}
 
